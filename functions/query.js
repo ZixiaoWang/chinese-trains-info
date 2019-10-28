@@ -14,7 +14,7 @@ const query = async ({ date, no }) => {
     }
     const response = axios.get(api, { params });
     const data = _.get(response, 'data.data.data');
-    return data
+    return data;
 }
 
-module.exports = { query };
+module.exports = query;

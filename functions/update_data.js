@@ -45,4 +45,4 @@ const updateData = async () => {
     updateDataByDate(latest_date, train_list[latest_date])
 };
 
-module.exports = { updateData }
+module.exports = updateData;
