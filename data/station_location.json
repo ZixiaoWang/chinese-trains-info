@@ -1,0 +1,286 @@
+{
+    "北京站": {
+        "station": "北京站",
+        "province": "北京"
+    },
+    "北京西站": {
+        "station": "北京西站",
+        "province": "北京"
+    },
+    "北京南站": {
+        "station": "北京南站",
+        "province": "北京"
+    },
+    "北京北站": {
+        "station": "北京北站",
+        "province": "北京"
+    },
+    "石家庄站": {
+        "station": "石家庄站",
+        "city": "石家庄",
+        "province": "河北"
+    },
+    "山海关": {
+        "station": "山海关",
+        "city": "秦皇岛",
+        "province": "河北"
+    },
+    "包头站": {
+        "station": "包头站",
+        "city": "包头",
+        "province": "内蒙古"
+    },
+    "包头东站": {
+        "station": "包头东站",
+        "city": "包头",
+        "province": "内蒙古"
+    },
+    "呼和浩特": {
+        "station": "呼和浩特",
+        "city": "呼和浩特",
+        "province": "内蒙古"
+    },
+    "通辽": {
+        "station": "通辽",
+        "city": "通辽",
+        "province": "内蒙古"
+    },
+    "长春站": {
+        "station": "长春站",
+        "city": "长春",
+        "province": "吉林"
+    },
+    "上海南站": {
+        "station": "上海南站",
+        "province": "上海"
+    },
+    "上海站": {
+        "station": "上海站",
+        "province": "上海"
+    },
+    "杭州站": {
+        "station": "杭州站",
+        "city": "杭州",
+        "province": "浙江"
+    },
+    "福州站": {
+        "station": "福州站",
+        "city": "福州",
+        "province": "福建"
+    },
+    "厦门站": {
+        "station": "厦门站",
+        "city": "厦门",
+        "province": "福建"
+    },
+    "武汉站": {
+        "station": "武汉站",
+        "city": "武汉",
+        "province": "湖北"
+    },
+    "武昌站": {
+        "station": "武昌站",
+        "city": "武汉",
+        "province": "湖北"
+    },
+    "汉口站": {
+        "station": "汉口站",
+        "city": "武汉",
+        "province": "湖北"
+    },
+    "襄樊站": {
+        "station": "襄樊站",
+        "city": "襄樊",
+        "province": "湖北"
+    },
+    "宜昌站": {
+        "station": "宜昌站",
+        "city": "宜昌",
+        "province": "湖北"
+    },
+    "十堰站": {
+        "station": "十堰站",
+        "city": "十堰",
+        "province": "湖北"
+    },
+    "广州北站": {
+        "station": "广州北站",
+        "city": "广州",
+        "province": "广东"
+    },
+    "广州东站": {
+        "station": "广州东站",
+        "city": "广州",
+        "province": "广东"
+    },
+    "广州南站": {
+        "station": "广州南站",
+        "city": "广州",
+        "province": "广东"
+    },
+    "广州站": {
+        "station": "广州站",
+        "city": "广州",
+        "province": "广东"
+    },
+    "深圳西": {
+        "station": "深圳西",
+        "city": "深圳",
+        "province": "广东"
+    },
+    "深圳站(图)": {
+        "station": "深圳站(图)",
+        "city": "深圳",
+        "province": "广东"
+    },
+    "成都站": {
+        "station": "成都站",
+        "city": "成都",
+        "province": "四川"
+    },
+    "昆明站": {
+        "station": "昆明站",
+        "city": "昆明",
+        "province": "云南"
+    },
+    "西安站": {
+        "station": "西安站",
+        "city": "西安",
+        "province": "陕西"
+    },
+    "银川站": {
+        "station": "银川站",
+        "city": "银川",
+        "province": "宁夏"
+    },
+    "乌鲁木齐站": {
+        "station": "乌鲁木齐站",
+        "city": "乌鲁木齐",
+        "province": "新疆"
+    },
+    "塘沽": {
+        "station": "塘沽",
+        "province": "天津"
+    },
+    "天津西站": {
+        "station": "天津西站",
+        "province": "天津"
+    },
+    "天津站": {
+        "station": "天津站",
+        "province": "天津"
+    },
+    "丹东站": {
+        "station": "丹东站",
+        "city": "丹东",
+        "province": "辽宁"
+    },
+    "锦州站": {
+        "station": "锦州站",
+        "city": "锦州",
+        "province": "辽宁"
+    },
+    "金州站": {
+        "station": "金州站",
+        "city": "大连",
+        "province": "辽宁"
+    },
+    "大连站": {
+        "station": "大连站",
+        "city": "大连",
+        "province": "辽宁"
+    },
+    "沈阳站": {
+        "station": "沈阳站",
+        "city": "沈阳",
+        "province": "辽宁"
+    },
+    "沈阳北站": {
+        "station": "沈阳北站",
+        "city": "沈阳",
+        "province": "辽宁"
+    },
+    "南京站": {
+        "station": "南京站",
+        "city": "南京",
+        "province": "江苏"
+    },
+    "合肥站": {
+        "station": "合肥站",
+        "city": "合肥",
+        "province": "安徽"
+    },
+    "鹰潭站": {
+        "station": "鹰潭站",
+        "city": "鹰潭",
+        "province": "江西"
+    },
+    "南昌站": {
+        "station": "南昌站",
+        "city": "南昌",
+        "province": "江西"
+    },
+    "驻马店站": {
+        "station": "驻马店站",
+        "city": "驻马店",
+        "province": "河南"
+    },
+    "漯河站": {
+        "station": "漯河站",
+        "city": "漯河",
+        "province": "河南"
+    },
+    "信阳站": {
+        "station": "信阳站",
+        "city": "信阳",
+        "province": "河南"
+    },
+    "长沙南站": {
+        "station": "长沙南站",
+        "city": "长沙",
+        "province": "湖南"
+    },
+    "长沙站": {
+        "station": "长沙站",
+        "city": "长沙",
+        "province": "湖南"
+    },
+    "南宁站": {
+        "station": "南宁站",
+        "city": "南宁",
+        "province": "广西"
+    },
+    "重庆": {
+        "station": "重庆",
+        "province": "重庆"
+    },
+    "重庆北站": {
+        "station": "重庆北站",
+        "province": "重庆"
+    },
+    "贵阳站": {
+        "station": "贵阳站",
+        "city": "贵阳",
+        "province": "贵州"
+    },
+    "拉萨站": {
+        "station": "拉萨站",
+        "city": "拉萨",
+        "province": "西藏"
+    },
+    "天水站": {
+        "station": "天水站",
+        "city": "天水",
+        "province": "甘肃"
+    },
+    "兰州站": {
+        "station": "兰州站",
+        "city": "兰州",
+        "province": "甘肃"
+    },
+    "西宁站": {
+        "station": "西宁站",
+        "city": "西宁",
+        "province": "青海"
+    }
+}
