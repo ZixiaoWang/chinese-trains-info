@@ -71,7 +71,24 @@
             }
         });
     }); };
+    var getAllTrains = function () { return __awaiter(void 0, void 0, void 0, function () {
+        var trainListJsonPath, response, trainList;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    trainListJsonPath = DATA_PATH + 'train_map.json';
+                    return [4 /*yield*/, fetch(trainListJsonPath)];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    trainList = _a.sent();
+                    return [2 /*return*/, trainList];
+            }
+        });
+    }); };
 
     getAllStations().then(console.log);
+    getAllTrains().then(console.log);
 
 }());
