@@ -3,14 +3,14 @@ import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 
 export default {
-    input: 'frontend/index.ts',
+    input: 'frontend/index.tsx',
     output: {
         file: './index.js',
-        format: 'iife'
+        format: 'cjs'
     },
     plugins: [
+        typescript(),
         commonjs(),
-        resolve(),
-        typescript()
+        resolve()
     ]
 }

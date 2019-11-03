@@ -29,17 +29,57 @@ export const trainService = (() => {
         search = async (keyword: string) => {
             const list: Train[] = await this.getList();
             const lowercase_keyword: string = keyword.toLowerCase();
+            const match_list: any[] = [];
 
             if (!keyword || keyword.length === 0) {
                 return list;
             }
 
-            return list.filter((train: Train) => {
-                return (
-                    train.code.includes(lowercase_keyword) || 
+            list.forEach((train: Train) => {
+                if (train.code.toLowerCase().includes(lowercase_keyword)) {
+                    match_list.push({ ...train, weight: 3 });
+                } else if (
                     train.from.includes(lowercase_keyword) ||
-                    train.to.includes(lowercase_keyword)
-                )
+                    train.to.includes(lowercase_keyword)) {
+                    match_list.push({ ...train, weight: 2 });
+                } else if (
+                    train.from_pinyin.includes(lowercase_keyword) ||
+                    train.to_pinyin.includes(lowercase_keyword)
+                ) {
+                    match_list.push({ ...train, weight: 1 })
+                }
+            });
+
+            return match_list.sort((pre, next) => {
+                return pre.weight > next.weight ? -1 : 1
+            });
+        }
+
+        searchFrom = async (keyword: string) => {
+            const results =  await this.search(keyword);
+            const lowercase_keyword: string = keyword.toLowerCase();
+
+            return results.filter((train: Train) => {
+                if (train.code.toLowerCase().includes(lowercase_keyword) ||
+                    train.from.includes(lowercase_keyword) ||
+                    train.from_pinyin.includes(lowercase_keyword)){
+                    return true;
+                }
+                return false;
+            })
+        }
+
+        searchTo = async (keyword: string) => {
+            const results =  await this.search(keyword);
+            const lowercase_keyword: string = keyword.toLowerCase();
+
+            return results.filter((train: Train) => {
+                if (train.code.toLowerCase().includes(lowercase_keyword) ||
+                    train.to.includes(lowercase_keyword) ||
+                    train.to_pinyin.includes(lowercase_keyword)){
+                    return true;
+                }
+                return false;
             })
         }
     }
