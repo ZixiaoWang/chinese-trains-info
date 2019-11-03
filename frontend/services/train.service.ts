@@ -25,6 +25,23 @@ export const trainService = (() => {
             }
             return this.train_map;
         }
+
+        search = async (keyword: string) => {
+            const list: Train[] = await this.getList();
+            const lowercase_keyword: string = keyword.toLowerCase();
+
+            if (!keyword || keyword.length === 0) {
+                return list;
+            }
+
+            return list.filter((train: Train) => {
+                return (
+                    train.code.includes(lowercase_keyword) || 
+                    train.from.includes(lowercase_keyword) ||
+                    train.to.includes(lowercase_keyword)
+                )
+            })
+        }
     }
     return new TrainService();
 })()
