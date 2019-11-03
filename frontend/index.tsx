@@ -1,5 +1,5 @@
-import { trainService, stationService } from './services/index';
 import { h, render } from 'preact';
+import './styles/main.scss';
 
 const App = () => {
     return (
