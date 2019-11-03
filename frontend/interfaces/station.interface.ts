@@ -9,6 +9,6 @@ export interface Station {
     city: string,
     lng: string | number,
     lat: string | number,
-    pinyin?: string,
-    abbreviation?: string
+    pinyin: string,
+    abbreviation: string
 }

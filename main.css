@@ -1,1 +1,18 @@
-undefined
+.input-container {
+  padding: 12px 24px; }
+  .input-container.is-from-input {
+    position: fixed;
+    bottom: 100px;
+    left: 0px;
+    width: 100%; }
+
+.page {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto; }
+
+html, body {
+  margin: 0px;
+  position: relative; }

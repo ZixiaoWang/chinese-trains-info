@@ -1,9 +1,11 @@
 import { h, render } from 'preact';
+import { HomePage } from './pages/index';
+
 import './styles/main.scss';
 
 const App = () => {
     return (
-        <div>Hello World</div>
+        <HomePage />
     )
 }
 

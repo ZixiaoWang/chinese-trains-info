@@ -26,6 +26,21 @@ export const stationService = (() => {
             return this.station_map;
         }
 
+        search = (keyword: string) => {
+            if (!keyword || keyword.length === 0) {
+                return this.station_list;
+            }
+
+            const lowercase_keyword: string = keyword.toLowerCase();
+            return this.station_list.filter((station: Station) => {
+                if (station.name.includes(lowercase_keyword) ||
+                    station.pinyin.includes(lowercase_keyword) ||
+                    station.abbreviation.includes(lowercase_keyword)) {
+                        return true;
+                    }
+                return false;
+            });
+        }
     }
 
     return new StationService();
