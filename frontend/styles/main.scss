@@ -1,7 +1,23 @@
+@import './helper';
 @import './input';
 @import './page';
 
 html, body {
     margin: 0px;
     position: relative;
+}
+
+.input:active, 
+.input:focus, 
+.is-active.input, 
+.is-active.textarea, 
+.is-focused.input, 
+.is-focused.textarea, 
+.select select.is-active, 
+.select select.is-focused, 
+.select select:active, 
+.select select:focus, 
+.textarea:active, 
+.textarea:focus {
+    box-shadow: none;
 }

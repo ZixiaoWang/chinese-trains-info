@@ -4,7 +4,7 @@ import { attach, onValueChange, onEventChange } from '../functions';
 
 @attach({ onValueChange })
 @attach({ onEventChange })
-export class ToPage extends Component {
+export class ToPage extends Component<any, any> {
     public state = {
         focus: false,
         keyword: null

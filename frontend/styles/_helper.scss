@@ -1,0 +1,10 @@
+.has {
+    &-input {
+        &-top { padding-top: 40px !important; }
+        &-bottom { padding-bottom: 40px !important; }
+    }
+}
+
+.is {
+    &-top-input { position: fixed; width: 100%; top: 0px; }
+}

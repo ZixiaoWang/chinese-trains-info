@@ -1,3 +1,14 @@
+.has-input-top {
+  padding-top: 40px !important; }
+
+.has-input-bottom {
+  padding-bottom: 40px !important; }
+
+.is-top-input {
+  position: fixed;
+  width: 100%;
+  top: 0px; }
+
 .input-container {
   padding: 12px 24px; }
   .input-container.is-from-input {
@@ -16,3 +27,17 @@
 html, body {
   margin: 0px;
   position: relative; }
+
+.input:active,
+.input:focus,
+.is-active.input,
+.is-active.textarea,
+.is-focused.input,
+.is-focused.textarea,
+.select select.is-active,
+.select select.is-focused,
+.select select:active,
+.select select:focus,
+.textarea:active,
+.textarea:focus {
+  box-shadow: none; }
