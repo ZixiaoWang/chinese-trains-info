@@ -1,11 +1,12 @@
 import { h, render } from 'preact';
-import { HomePage } from './pages/index';
+import { FromPage, ToPage } from './pages/index';
 
 import './styles/main.scss';
 
 const App = () => {
     return (
-        <HomePage />
+        <FromPage />
+        // <ToPage />
     )
 }
 
