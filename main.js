@@ -17416,11 +17416,23 @@ var ToPage = /** @class */ (function (_super) {
         attach({ onEventChange: onEventChange })
     ], ToPage);
     return ToPage;
-}(y));
+}(PageBase));
+
+var RoutesPage = /** @class */ (function (_super) {
+    __extends(RoutesPage, _super);
+    function RoutesPage() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    RoutesPage.prototype.render = function () {
+        return h("div", null, "Hello world");
+    };
+    return RoutesPage;
+}(PageBase));
 
 var App = function () {
     return (
     // <FromPage />
-    h(ToPage, null));
+    // <ToPage />
+    h(RoutesPage, null));
 };
 H(h(App, null), document.body);

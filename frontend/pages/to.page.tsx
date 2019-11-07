@@ -1,10 +1,11 @@
-import { h, Component } from 'preact';
+import { h, Component, Fragment } from 'preact';
 import { Container, Hero } from '../components';
 import { attach, onValueChange, onEventChange } from '../functions';
+import { PageBase } from './base';
 
 @attach({ onValueChange })
 @attach({ onEventChange })
-export class ToPage extends Component<any, any> {
+export class ToPage extends PageBase {
     public state = {
         focus: false,
         keyword: null
