@@ -17191,6 +17191,19 @@ var PageBase = /** @class */ (function (_super) {
             console.log(state);
             _this.setState(state);
         };
+        _this.renderHighlight = function (original, highlights) {
+            if (!highlights) {
+                return original;
+            }
+            var reg = new RegExp(highlights, 'g');
+            var fragments = original.split(reg);
+            return fragments
+                .map(function (fragment, index) {
+                return (h(d, null,
+                    h("span", null, fragment),
+                    index > 0 && h("strong", { className: "has-text-link" }, highlights)));
+            });
+        };
         return _this;
     }
     return PageBase;
@@ -17307,12 +17320,10 @@ var FromPage = /** @class */ (function (_super) {
                 .map(function (station, index) {
                 return (h("div", { className: "panel-block is-block", key: index },
                     h("div", null,
-                        station.name,
-                        " (",
-                        station.abbreviation,
-                        ")"),
-                    h("div", null,
-                        h("small", null, station.pinyin))));
+                        _this.renderHighlight(station.name, _this.state.keyword),
+                        "\u00A0",
+                        _this.renderHighlight(station.abbreviation, _this.state.keyword)),
+                    h("small", null, _this.renderHighlight(station.pinyin, _this.state.keyword))));
             });
             return (h("div", { className: "panel" }, items));
         };

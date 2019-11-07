@@ -19,7 +19,6 @@ export class FromPage extends PageBase {
     }
 
     renderItems = () => {
-
         if (!this.state.keyword) {
             return null;
         }        
@@ -29,10 +28,12 @@ export class FromPage extends PageBase {
             .map((station: Station, index: number) => {
                 return (
                     <div className="panel-block is-block" key={ index }>
-                        <div>{ station.name } ({ station.abbreviation })</div>
                         <div>
-                            <small>{ station.pinyin }</small>
+                            { this.renderHighlight(station.name, this.state.keyword) }
+                            &nbsp;
+                            { this.renderHighlight(station.abbreviation, this.state.keyword) }
                         </div>
+                        <small>{ this.renderHighlight(station.pinyin, this.state.keyword) }</small>
                     </div>
                 );
             });

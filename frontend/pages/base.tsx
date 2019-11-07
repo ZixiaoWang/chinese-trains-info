@@ -1,4 +1,4 @@
-import { h, Component, ComponentChild } from 'preact';
+import { h, Component, Fragment } from 'preact';
 import lodash from 'lodash';
 
 export abstract class PageBase extends Component {
@@ -15,6 +15,24 @@ export abstract class PageBase extends Component {
         lodash.set(state, path, target.value);
         console.log(state);
         this.setState(state);
+    }
+
+    renderHighlight = (original: string, highlights: string | null) => {
+        if (!highlights) {
+            return original;
+        }
+
+        const reg: RegExp = new RegExp(highlights, 'g');
+        const fragments: string[] = original.split(reg);
+        return fragments
+            .map((fragment: string, index: number) => {
+                return (
+                    <Fragment>
+                        <span>{ fragment }</span>
+                        { index > 0 && <strong className="has-text-link">{ highlights }</strong> }
+                    </Fragment>
+                )
+            });
     }
 
     abstract render(): h.JSX.Element;
