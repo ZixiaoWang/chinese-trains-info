@@ -7,4 +7,5 @@
 
 .is {
     &-top-input { position: fixed; width: 100%; top: 0px; }
+    &-borderless { border: 0px solid transparent !important; }
 }

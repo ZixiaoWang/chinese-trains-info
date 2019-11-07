@@ -16,11 +16,12 @@ export class ToPage extends Component<any, any> {
                 <Container>
                     <form className="form">
                         <div className="field">
-                            <div className="content">
-                                <label className="label">第二步</label>
-                                <p className="is-size-6">
-                                    请告诉我们您想去哪，或者您可以选择“随机”
-                            </p>
+                            <div className="control">
+                                <div className="input is-shadowless is-borderless">
+                                    <span>我从</span>
+                                    <strong className="has-text-link">新疆</strong>
+                                    <span>出发</span>
+                                </div>
                             </div>
                         </div>
                         <div className="field">
@@ -31,12 +32,9 @@ export class ToPage extends Component<any, any> {
                                 </span>
                             </div>
                         </div>
-                        <div className="field">
-                            <button className="button is-info is-rounded is-fullwidth">随机</button>
-                        </div>
                         <hr />
                         <div className="field">
-                            <button className="button is-primary is-rounded is-fullwidth">下一步</button>
+                            <button className="button is-info is-rounded is-fullwidth">随便</button>
                         </div>
                     </form>
                 </Container>

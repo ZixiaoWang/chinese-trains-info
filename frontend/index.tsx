@@ -5,8 +5,8 @@ import './styles/main.scss';
 
 const App = () => {
     return (
-        <FromPage />
-        // <ToPage />
+        // <FromPage />
+        <ToPage />
     )
 }
 

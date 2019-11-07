@@ -9,6 +9,9 @@
   width: 100%;
   top: 0px; }
 
+.is-borderless {
+  border: 0px solid transparent !important; }
+
 .input-container {
   padding: 12px 24px; }
   .input-container.is-from-input {

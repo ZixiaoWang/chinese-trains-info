@@ -17397,19 +17397,19 @@ var ToPage = /** @class */ (function (_super) {
             h(Container, null,
                 h("form", { className: "form" },
                     h("div", { className: "field" },
-                        h("div", { className: "content" },
-                            h("label", { className: "label" }, "\u7B2C\u4E8C\u6B65"),
-                            h("p", { className: "is-size-6" }, "\u8BF7\u544A\u8BC9\u6211\u4EEC\u60A8\u60F3\u53BB\u54EA\uFF0C\u6216\u8005\u60A8\u53EF\u4EE5\u9009\u62E9\u201C\u968F\u673A\u201D"))),
+                        h("div", { className: "control" },
+                            h("div", { className: "input is-shadowless is-borderless" },
+                                h("span", null, "\u6211\u4ECE"),
+                                h("strong", { className: "has-text-link" }, "\u65B0\u7586"),
+                                h("span", null, "\u51FA\u53D1")))),
                     h("div", { className: "field" },
                         h("div", { className: "control has-icons-left" },
                             h("input", { type: "text", className: "input is-rounded", placeholder: "\u6211\u60F3\u53BB..." }),
                             h("span", { className: "icon is-small is-left" },
                                 h("i", { className: "ion ion-md-map" })))),
-                    h("div", { className: "field" },
-                        h("button", { className: "button is-info is-rounded is-fullwidth" }, "\u968F\u673A")),
                     h("hr", null),
                     h("div", { className: "field" },
-                        h("button", { className: "button is-primary is-rounded is-fullwidth" }, "\u4E0B\u4E00\u6B65"))))));
+                        h("button", { className: "button is-info is-rounded is-fullwidth" }, "\u968F\u4FBF"))))));
     };
     ToPage = __decorate([
         attach({ onValueChange: onValueChange }),
@@ -17419,8 +17419,8 @@ var ToPage = /** @class */ (function (_super) {
 }(y));
 
 var App = function () {
-    return (h(FromPage, null)
-    // <ToPage />
-    );
+    return (
+    // <FromPage />
+    h(ToPage, null));
 };
 H(h(App, null), document.body);
