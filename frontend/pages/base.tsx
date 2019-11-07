@@ -13,6 +13,7 @@ export abstract class PageBase extends Component {
         let state: any = this.state;
         let target: HTMLInputElement = event.target as HTMLInputElement;
         lodash.set(state, path, target.value);
+        console.log(state);
         this.setState(state);
     }
 

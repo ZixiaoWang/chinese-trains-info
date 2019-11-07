@@ -1,11 +1,14 @@
 import { h, Fragment } from 'preact';
 import { PageBase } from './base';
 import { Container, Hero } from '../components';
+import { stationService } from '../services';
+import { Station } from '../interfaces';
 
 export class FromPage extends PageBase {
     public state = {
         focus: false,
-        keyword: null
+        keyword: null,
+        stations: []
     }
 
     reset = () => {
@@ -13,6 +16,32 @@ export class FromPage extends PageBase {
             focus: false,
             keyword: null
         })
+    }
+
+    renderItems = () => {
+
+        if (!this.state.keyword) {
+            return null;
+        }        
+
+        const items = stationService
+            .search(this.state.keyword)
+            .map((station: Station, index: number) => {
+                return (
+                    <div className="panel-block is-block" key={ index }>
+                        <div>{ station.name } ({ station.abbreviation })</div>
+                        <div>
+                            <small>{ station.pinyin }</small>
+                        </div>
+                    </div>
+                );
+            });
+
+        return (
+            <div className="panel">
+                { items }
+            </div>
+        )
     }
 
     renderUnfocusedStatus = () => (
@@ -43,6 +72,7 @@ export class FromPage extends PageBase {
 
     renderFocusedStatus = () => (
         <div className="page has-input-top">
+            { this.renderItems() }
             <div className="field has-addons is-top-input">
                 <div className="control">
                     <a className="button is-radiusless" onClick={ this.reset }>
@@ -51,14 +81,9 @@ export class FromPage extends PageBase {
                 </div>
                 <div className="control is-expanded">
                     <input type="text" 
-                        onChange={ this.onEventChange.bind(this, 'keyword') }
+                        onKeyUp={ this.onEventChange.bind(this, 'keyword') }
                         className="input is-radiusless" 
                         placeholder="从哪里出发?"/>
-                </div>
-                <div className="control">
-                    <a className="button is-radiusless">
-                        <i className="ion ion-md-send"></i>
-                    </a>
                 </div>
             </div>
         </div>

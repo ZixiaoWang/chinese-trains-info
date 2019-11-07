@@ -1,10 +1,16 @@
 import { Station } from "../interfaces/index";
 import { DATA_PATH } from "../constants/index";
+import lodash from 'lodash';
 
 export const stationService = (() => {
     class StationService {
         private station_list: Station[] = [];
         private station_map: Map<string, Station> = new Map();
+
+        constructor() {
+            this.getList();
+            this.getMap();
+        }
         
         getList = async (forceUpdate: boolean = false) => {
             if (this.station_list.length === 0 || !!forceUpdate === true) {
@@ -26,16 +32,20 @@ export const stationService = (() => {
             return this.station_map;
         }
 
-        search = (keyword: string) => {
+        search = (keyword: string | null): Station[] => {
             if (!keyword || keyword.length === 0) {
                 return this.station_list;
             }
 
             const lowercase_keyword: string = keyword.toLowerCase();
             return this.station_list.filter((station: Station) => {
-                if (station.name.includes(lowercase_keyword) ||
-                    station.pinyin.includes(lowercase_keyword) ||
-                    station.abbreviation.includes(lowercase_keyword)) {
+                const name = lodash.get(station, 'name', '').toLowerCase();
+                const pinyin = lodash.get(station, 'pinyin', '').toLowerCase();
+                const abbreviation = lodash.get(station, 'abbreviation', '').toLowerCase();
+
+                if (name.includes(lowercase_keyword) ||
+                    pinyin.includes(lowercase_keyword) ||
+                    abbreviation.includes(lowercase_keyword)) {
                         return true;
                     }
                 return false;
