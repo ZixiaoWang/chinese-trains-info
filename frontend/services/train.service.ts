@@ -6,6 +6,11 @@ export const trainService = (() => {
         private train_list: Train[] = [];
         private train_map: Map<string, Train> = new Map();
 
+        constructor () {
+            this.getList();
+            this.getMap();
+        }
+
         getList = async (forceUpdate: boolean = false) => {
             if (this.train_list.length === 0 || !!forceUpdate === true) {
                 const trainListJsonPath: string = DATA_PATH + 'train_list.json';
@@ -77,6 +82,26 @@ export const trainService = (() => {
                 if (train.code.toLowerCase().includes(lowercase_keyword) ||
                     train.to.includes(lowercase_keyword) ||
                     train.to_pinyin.includes(lowercase_keyword)){
+                    return true;
+                }
+                return false;
+            })
+        }
+
+        searchFromAndOrTo = async (from: string, to?: string) => {
+            const from_lowercase: string = from.toLowerCase();
+            const fromList: Train[] = await this.searchFrom(from_lowercase);
+            
+            if (!to) {
+                return fromList;
+            }
+
+            const to_lowercase: string = to.toLowerCase();
+            
+            return fromList.filter((train: Train) => {
+                if (train.code.toLowerCase().includes(to_lowercase) ||
+                    train.to.includes(to_lowercase) ||
+                    train.to_pinyin.includes(to_lowercase)){
                     return true;
                 }
                 return false;

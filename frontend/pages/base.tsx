@@ -1,7 +1,7 @@
 import { h, Component, Fragment } from 'preact';
 import lodash from 'lodash';
 
-export abstract class PageBase extends Component {
+export abstract class PageBase extends Component<any, any> {
     onValueChange = (path: string, value: any) => {
         let state: any = this.state;
         lodash.set(state, path, value);
