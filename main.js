@@ -18151,14 +18151,12 @@ var PageBase = /** @class */ (function (_super) {
         _this.onValueChange = function (path, value) {
             var state = _this.state;
             lodash.set(state, path, value);
-            console.log(state);
             _this.setState(state);
         };
         _this.onEventChange = function (path, event) {
             var state = _this.state;
             var target = event.target;
             lodash.set(state, path, target.value);
-            console.log(state);
             _this.setState(state);
         };
         _this.renderHighlight = function (original, highlights) {
@@ -18425,6 +18423,10 @@ var FromPage = /** @class */ (function (_super) {
             keyword: null,
             stations: []
         };
+        _this.navigateTo = function (station) {
+            var name = encodeURIComponent(station.name);
+            route("/from/" + name + "/to");
+        };
         _this.reset = function () {
             _this.setState({
                 focus: false,
@@ -18438,7 +18440,7 @@ var FromPage = /** @class */ (function (_super) {
             var items = stationService
                 .search(_this.state.keyword)
                 .map(function (station, index) {
-                return (h("div", { className: "panel-block is-block", key: index },
+                return (h("div", { key: index, className: "panel-block is-block", onClick: _this.navigateTo.bind(_this, station) },
                     h("div", null,
                         _this.renderHighlight(station.name, _this.state.keyword),
                         "\u00A0",
@@ -18512,7 +18514,8 @@ var ToPage = /** @class */ (function (_super) {
         };
         return _this;
     }
-    ToPage.prototype.render = function () {
+    ToPage.prototype.render = function (props) {
+        var from = decodeURIComponent(props.from);
         return (h(Hero, null,
             h(Container, null,
                 h("form", { className: "form" },
@@ -18520,7 +18523,10 @@ var ToPage = /** @class */ (function (_super) {
                         h("div", { className: "control" },
                             h("div", { className: "input is-shadowless is-borderless" },
                                 h("span", null, "\u6211\u4ECE"),
-                                h("strong", { className: "has-text-link" }, "\u65B0\u7586"),
+                                h("strong", { className: "has-text-link" },
+                                    "\u00A0",
+                                    from,
+                                    "\u00A0"),
                                 h("span", null, "\u51FA\u53D1")))),
                     h("div", { className: "field" },
                         h("div", { className: "control has-icons-left" },

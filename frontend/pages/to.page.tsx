@@ -11,7 +11,9 @@ export class ToPage extends PageBase {
         keyword: null
     };
     
-    render() {
+    render(props: any) {
+        const from: string = decodeURIComponent(props.from);
+
         return (
             <Hero>
                 <Container>
@@ -20,7 +22,7 @@ export class ToPage extends PageBase {
                             <div className="control">
                                 <div className="input is-shadowless is-borderless">
                                     <span>我从</span>
-                                    <strong className="has-text-link">新疆</strong>
+                                    <strong className="has-text-link">&nbsp;{ from }&nbsp;</strong>
                                     <span>出发</span>
                                 </div>
                             </div>

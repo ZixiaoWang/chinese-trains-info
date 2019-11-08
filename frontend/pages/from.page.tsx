@@ -1,4 +1,5 @@
 import { h, Fragment } from 'preact';
+import { route } from 'preact-router';
 import { PageBase } from './base';
 import { Container, Hero } from '../components';
 import { stationService } from '../services';
@@ -9,6 +10,11 @@ export class FromPage extends PageBase {
         focus: false,
         keyword: null,
         stations: []
+    }
+
+    navigateTo = (station: Station) => {
+        const name: string = encodeURIComponent(station.name);
+        route(`/from/${ name }/to`);
     }
 
     reset = () => {
@@ -27,7 +33,9 @@ export class FromPage extends PageBase {
             .search(this.state.keyword)
             .map((station: Station, index: number) => {
                 return (
-                    <div className="panel-block is-block" key={ index }>
+                    <div key={ index } 
+                        className="panel-block is-block" 
+                        onClick={ this.navigateTo.bind(this, station) }>
                         <div>
                             { this.renderHighlight(station.name, this.state.keyword) }
                             &nbsp;
