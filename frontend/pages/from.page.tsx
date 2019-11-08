@@ -72,9 +72,9 @@ export class FromPage extends PageBase {
     );
 
     renderFocusedStatus = () => (
-        <div className="page has-input-top">
+        <div className="page has-top-input">
             { this.renderItems() }
-            <div className="field has-addons is-top-input">
+            <div className="field has-addons is-fixed-top">
                 <div className="control">
                     <a className="button is-radiusless" onClick={ this.reset }>
                         <i className="ion ion-md-arrow-back"></i>

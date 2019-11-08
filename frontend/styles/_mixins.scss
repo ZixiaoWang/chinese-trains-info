@@ -1,0 +1,19 @@
+$gap: 12px;
+
+@mixin box ($model, $unit) {
+    &-#{$model} {
+        &-#{$unit} { padding: $unit * $gap !important; }
+        &-top-#{$unit} { padding-top: $unit * $gap !important; }
+        &-bottom-#{$unit} { padding-bottom: $unit * $gap !important; }
+        &-left-#{$unit} { padding-left: $unit * $gap !important; }
+        &-right-#{$unit} { padding-right: $unit * $gap !important; }
+    }
+}
+
+@mixin height ($unit) {
+    height: $unit * $gap;
+}
+
+@mixin shadow ($unit, $color) {
+    box-shadow: 0px 0px $unit * 1px rgba($color, (10 - $unit) * 0.1);
+}

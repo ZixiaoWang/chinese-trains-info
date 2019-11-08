@@ -17339,9 +17339,9 @@ var FromPage = /** @class */ (function (_super) {
                             h("input", { type: "text", onClick: _this.onValueChange.bind(_this, 'focus', true), className: "input is-rounded", placeholder: "\u4ECE\u54EA\u91CC\u51FA\u53D1?" }),
                             h("span", { className: "icon is-small is-left" },
                                 h("i", { className: "ion ion-md-pin" })))))))); };
-        _this.renderFocusedStatus = function () { return (h("div", { className: "page has-input-top" },
+        _this.renderFocusedStatus = function () { return (h("div", { className: "page has-top-input" },
             _this.renderItems(),
-            h("div", { className: "field has-addons is-top-input" },
+            h("div", { className: "field has-addons is-fixed-top" },
                 h("div", { className: "control" },
                     h("a", { className: "button is-radiusless", onClick: _this.reset },
                         h("i", { className: "ion ion-md-arrow-back" }))),
@@ -17421,10 +17421,30 @@ var ToPage = /** @class */ (function (_super) {
 var RoutesPage = /** @class */ (function (_super) {
     __extends(RoutesPage, _super);
     function RoutesPage() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.renderRoutes = function () {
+            return (null);
+        };
+        return _this;
     }
     RoutesPage.prototype.render = function () {
-        return h("div", null, "Hello world");
+        return (h("div", { className: "page has-padding-top-7" },
+            h("div", { className: "is-fixed-top is-height-7 has-shadow-3" },
+                h("div", { className: "is-flex has-addons" },
+                    h("div", { className: "control" },
+                        h("div", { className: "input is-borderless is-shadowless" },
+                            h("span", { className: "has-text-gray" }, "\u4ECE"))),
+                    h("div", { className: "control" },
+                        h("div", { className: "input is-borderless is-shadowless" },
+                            h("span", { className: "has-text-info" }, "\u65B0\u7586")))),
+                h("div", { className: "is-flex has-addons" },
+                    h("div", { className: "control" },
+                        h("div", { className: "input is-borderless is-shadowless" },
+                            h("span", { className: "has-text-gray" }, "\u5230"))),
+                    h("div", { className: "control" },
+                        h("div", { className: "input is-borderless is-shadowless" },
+                            h("span", { className: "has-text-info" }, "\u547C\u548C\u6D69\u7279"))))),
+            h(d, null, this.renderRoutes())));
     };
     return RoutesPage;
 }(PageBase));

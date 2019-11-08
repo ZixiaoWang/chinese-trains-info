@@ -1,11 +1,35 @@
+@import './mixins';
+
 .has {
-    &-input {
-        &-top { padding-top: 40px !important; }
-        &-bottom { padding-bottom: 40px !important; }
+    &-top-input { padding-top: 40px !important; }
+    &-bottom-input { padding-bottom: 40px !important; }
+
+    @for $i from 1 to 9 {
+        @include box ('padding', $i);
+        @include box ('margin', $i);
+    }
+
+    @for $i from 1 to 9 {
+        &-shadow-#{ $i } {
+            @include shadow ($i, #666);
+        }
     }
 }
 
 .is {
-    &-top-input { position: fixed; width: 100%; top: 0px; }
-    &-borderless { border: 0px solid transparent !important; }
+    &-fixed-top { 
+        position: fixed; 
+        width: 100%; 
+        top: 0px; 
+    }
+
+    @for $i from 1 to 9 {
+        &-height-#{ $i } {
+            @include height ($i);
+        }
+    }
+
+    &-borderless { 
+        border: 0px solid transparent !important; 
+    }
 }
