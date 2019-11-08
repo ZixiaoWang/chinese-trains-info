@@ -12,11 +12,11 @@ const Redirect = (props: any = {}) => {
 
 const App = () => {
     return (
-        <Router history={ createBrowserHistory() }>
-            <FromPage href="/from"/>
-            <ToPage href="/from/:from/to"/>
-            <RoutesPage href="/from/:from/to/:to"/>
-            <Redirect to="/from"/>
+        <Router history={ createHashHistory() }>
+            <FromPage path="/from"/>
+            <ToPage path="/from/:from/to"/>
+            <RoutesPage path="/from/:from/to/:to"/>
+            <Redirect path="/" to="/from"/>
         </Router>
     )
 }

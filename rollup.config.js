@@ -7,7 +7,8 @@ export default {
     input: 'frontend/index.tsx',
     output: {
         file: './main.js',
-        format: 'cjs'
+        format: 'cjs',
+        intro: 'const process = { env: { NODE_ENV: null } };'
     },
     plugins: [
         typescript(),
