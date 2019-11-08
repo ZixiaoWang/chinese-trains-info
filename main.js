@@ -18515,6 +18515,7 @@ var ToPage = /** @class */ (function (_super) {
         return _this;
     }
     ToPage.prototype.render = function (props) {
+        console.log(props);
         var from = decodeURIComponent(props.from);
         return (h(Hero, null,
             h(Container, null,
@@ -18535,7 +18536,7 @@ var ToPage = /** @class */ (function (_super) {
                                 h("i", { className: "ion ion-md-map" })))),
                     h("hr", null),
                     h("div", { className: "field" },
-                        h("button", { className: "button is-info is-rounded is-fullwidth" }, "\u968F\u4FBF"))))));
+                        h(Link, { href: props.url + "/all", className: "button is-info is-rounded is-fullwidth" }, "\u968F\u4FBF"))))));
     };
     ToPage = __decorate([
         attach({ onValueChange: onValueChange }),

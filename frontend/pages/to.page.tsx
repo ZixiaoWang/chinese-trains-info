@@ -1,4 +1,5 @@
 import { h, Component, Fragment } from 'preact';
+import { route, Link } from 'preact-router';
 import { Container, Hero } from '../components';
 import { attach, onValueChange, onEventChange } from '../functions';
 import { PageBase } from './base';
@@ -11,7 +12,8 @@ export class ToPage extends PageBase {
         keyword: null
     };
     
-    render(props: any) {
+    render(props: any) { 
+        console.log(props)
         const from: string = decodeURIComponent(props.from);
 
         return (
@@ -37,7 +39,10 @@ export class ToPage extends PageBase {
                         </div>
                         <hr />
                         <div className="field">
-                            <button className="button is-info is-rounded is-fullwidth">随便</button>
+                            <Link href={`${props.url}/all`}
+                                className="button is-info is-rounded is-fullwidth">
+                                随便
+                            </Link>
                         </div>
                     </form>
                 </Container>
