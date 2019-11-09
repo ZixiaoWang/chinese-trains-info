@@ -29,6 +29,7 @@ export class FromPage extends PageBase {
             return null;
         }        
 
+        const keyword: string | null = this.state.keyword;
         const items = stationService
             .search(this.state.keyword)
             .map((station: Station, index: number) => {
@@ -37,11 +38,11 @@ export class FromPage extends PageBase {
                         className="panel-block is-block" 
                         onClick={ this.navigateTo.bind(this, station) }>
                         <div>
-                            { this.renderHighlight(station.name, this.state.keyword) }
+                            { this.renderHighlight(station.name, keyword) }
                             &nbsp;
-                            { this.renderHighlight(station.abbreviation, this.state.keyword) }
+                            { this.renderHighlight(station.abbreviation, keyword) }
                         </div>
-                        <small>{ this.renderHighlight(station.pinyin, this.state.keyword) }</small>
+                        <small>{ this.renderHighlight(station.pinyin, keyword) }</small>
                     </div>
                 );
             });

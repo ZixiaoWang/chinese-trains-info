@@ -60,7 +60,11 @@ export const trainService = (() => {
             });
         }
 
-        searchFrom = (keyword: string) => {
+        searchFrom = (keyword: string | null | undefined) => {
+            if (!keyword) {
+                return this.train_list;
+            }
+
             const results = this.search(keyword);
             const lowercase_keyword: string = keyword.toLowerCase();
 
@@ -74,7 +78,11 @@ export const trainService = (() => {
             })
         }
 
-        searchTo = (keyword: string) => {
+        searchTo = (keyword: string | null | undefined) => {
+            if (!keyword) {
+                return this.train_list;
+            }
+
             const results = this.search(keyword);
             const lowercase_keyword: string = keyword.toLowerCase();
 

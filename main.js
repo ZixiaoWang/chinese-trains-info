@@ -18264,6 +18264,9 @@ var trainService = (function () {
                 });
             };
             this.searchFrom = function (keyword) {
+                if (!keyword) {
+                    return _this.train_list;
+                }
                 var results = _this.search(keyword);
                 var lowercase_keyword = keyword.toLowerCase();
                 return results.filter(function (train) {
@@ -18276,6 +18279,9 @@ var trainService = (function () {
                 });
             };
             this.searchTo = function (keyword) {
+                if (!keyword) {
+                    return _this.train_list;
+                }
                 var results = _this.search(keyword);
                 var lowercase_keyword = keyword.toLowerCase();
                 return results.filter(function (train) {
@@ -18408,15 +18414,16 @@ var FromPage = /** @class */ (function (_super) {
             if (!_this.state.keyword) {
                 return null;
             }
+            var keyword = _this.state.keyword;
             var items = stationService
                 .search(_this.state.keyword)
                 .map(function (station, index) {
                 return (h("div", { key: index, className: "panel-block is-block", onClick: _this.navigateTo.bind(_this, station) },
                     h("div", null,
-                        _this.renderHighlight(station.name, _this.state.keyword),
+                        _this.renderHighlight(station.name, keyword),
                         "\u00A0",
-                        _this.renderHighlight(station.abbreviation, _this.state.keyword)),
-                    h("small", null, _this.renderHighlight(station.pinyin, _this.state.keyword))));
+                        _this.renderHighlight(station.abbreviation, keyword)),
+                    h("small", null, _this.renderHighlight(station.pinyin, keyword))));
             });
             return (h("div", { className: "panel" }, items));
         };
@@ -18483,11 +18490,50 @@ var ToPage = /** @class */ (function (_super) {
             focus: false,
             keyword: null
         };
+        _this.navigateTo = function (train) {
+            var to = encodeURIComponent(train.to);
+            route("/from/" + _this.props.from + "/to/" + to);
+        };
+        _this.reset = function () {
+            _this.setState({
+                focus: false,
+                keyword: null
+            });
+        };
+        _this.renderItems = function () {
+            if (!_this.state.keyword) {
+                return null;
+            }
+            var from = decodeURIComponent(_this.props.from);
+            var keyword = _this.state.keyword;
+            var items = trainService
+                .searchTo(_this.state.keyword)
+                .map(function (train, index) {
+                return (h("div", { key: index, className: "panel-block is-block", onClick: _this.navigateTo.bind(_this, train) },
+                    h("div", { className: "is-size-7" }, _this.renderHighlight(train.code, keyword)),
+                    h("div", null,
+                        h("span", null, from),
+                        h("span", null, " - "),
+                        h("span", null, _this.renderHighlight(train.to, keyword))),
+                    h("div", { className: "is-size-7" },
+                        h("i", { className: "has-text-grey" }, train.no))));
+            });
+            return (h("div", { className: "panel" }, items));
+        };
+        _this.renderFocusedStatus = function () {
+            return (h("div", { className: "page has-top-input" },
+                _this.renderItems(),
+                h("div", { className: "field has-addons is-fixed-top" },
+                    h("div", { className: "control" },
+                        h("a", { className: "button is-radiusless", onClick: _this.reset },
+                            h("i", { className: "ion ion-md-arrow-back" }))),
+                    h("div", { className: "control is-expanded" },
+                        h("input", { type: "text", onKeyUp: _this.onEventChange.bind(_this, 'keyword'), className: "input is-radiusless", placeholder: "\u4ECE\u54EA\u91CC\u51FA\u53D1?" })))));
+        };
         return _this;
     }
-    ToPage.prototype.render = function (props) {
-        console.log(props);
-        var from = decodeURIComponent(props.from);
+    ToPage.prototype.renderUnfocusedStatus = function () {
+        var from = decodeURIComponent(this.props.from);
         return (h(Hero, null,
             h(Container, null,
                 h("form", { className: "form" },
@@ -18502,12 +18548,19 @@ var ToPage = /** @class */ (function (_super) {
                                 h("span", null, "\u51FA\u53D1")))),
                     h("div", { className: "field" },
                         h("div", { className: "control has-icons-left" },
-                            h("input", { type: "text", className: "input is-rounded", placeholder: "\u6211\u60F3\u53BB..." }),
+                            h("input", { type: "text", className: "input is-rounded", placeholder: "\u6211\u60F3\u53BB...", onClick: this.onValueChange.bind(this, 'focus', true) }),
                             h("span", { className: "icon is-small is-left" },
                                 h("i", { className: "ion ion-md-map" })))),
                     h("hr", null),
                     h("div", { className: "field" },
-                        h(Link, { href: props.url + "/all", className: "button is-info is-rounded is-fullwidth" }, "\u968F\u4FBF"))))));
+                        h(Link, { href: this.props.url + "/all", className: "button is-info is-rounded is-fullwidth" }, "\u968F\u4FBF"))))));
+    };
+    ToPage.prototype.render = function () {
+        return (h(d, null,
+            (this.state.focus || this.state.keyword) &&
+                this.renderFocusedStatus(),
+            !(this.state.focus || this.state.keyword) &&
+                this.renderUnfocusedStatus()));
     };
     ToPage = __decorate([
         attach({ onValueChange: onValueChange }),
