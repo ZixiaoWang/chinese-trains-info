@@ -18239,99 +18239,70 @@ var trainService = (function () {
                     });
                 });
             };
-            this.search = function (keyword) { return __awaiter(_this, void 0, void 0, function () {
-                var list, lowercase_keyword, match_list;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.getList()];
-                        case 1:
-                            list = _a.sent();
-                            lowercase_keyword = keyword.toLowerCase();
-                            match_list = [];
-                            if (!keyword || keyword.length === 0) {
-                                return [2 /*return*/, list];
-                            }
-                            list.forEach(function (train) {
-                                if (train.code.toLowerCase().includes(lowercase_keyword)) {
-                                    match_list.push(__assign(__assign({}, train), { weight: 3 }));
-                                }
-                                else if (train.from.includes(lowercase_keyword) ||
-                                    train.to.includes(lowercase_keyword)) {
-                                    match_list.push(__assign(__assign({}, train), { weight: 2 }));
-                                }
-                                else if (train.from_pinyin.includes(lowercase_keyword) ||
-                                    train.to_pinyin.includes(lowercase_keyword)) {
-                                    match_list.push(__assign(__assign({}, train), { weight: 1 }));
-                                }
-                            });
-                            return [2 /*return*/, match_list.sort(function (pre, next) {
-                                    return pre.weight > next.weight ? -1 : 1;
-                                })];
+            this.search = function (keyword) {
+                var list = _this.train_list;
+                var lowercase_keyword = keyword.toLowerCase();
+                var match_list = [];
+                if (!keyword || keyword.length === 0) {
+                    return list;
+                }
+                list.forEach(function (train) {
+                    if (train.code.toLowerCase().includes(lowercase_keyword)) {
+                        match_list.push(__assign(__assign({}, train), { weight: 3 }));
+                    }
+                    else if (train.from.includes(lowercase_keyword) ||
+                        train.to.includes(lowercase_keyword)) {
+                        match_list.push(__assign(__assign({}, train), { weight: 2 }));
+                    }
+                    else if (train.from_pinyin.includes(lowercase_keyword) ||
+                        train.to_pinyin.includes(lowercase_keyword)) {
+                        match_list.push(__assign(__assign({}, train), { weight: 1 }));
                     }
                 });
-            }); };
-            this.searchFrom = function (keyword) { return __awaiter(_this, void 0, void 0, function () {
-                var results, lowercase_keyword;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.search(keyword)];
-                        case 1:
-                            results = _a.sent();
-                            lowercase_keyword = keyword.toLowerCase();
-                            return [2 /*return*/, results.filter(function (train) {
-                                    if (train.code.toLowerCase().includes(lowercase_keyword) ||
-                                        train.from.includes(lowercase_keyword) ||
-                                        train.from_pinyin.includes(lowercase_keyword)) {
-                                        return true;
-                                    }
-                                    return false;
-                                })];
-                    }
+                return match_list.sort(function (pre, next) {
+                    return pre.weight > next.weight ? -1 : 1;
                 });
-            }); };
-            this.searchTo = function (keyword) { return __awaiter(_this, void 0, void 0, function () {
-                var results, lowercase_keyword;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.search(keyword)];
-                        case 1:
-                            results = _a.sent();
-                            lowercase_keyword = keyword.toLowerCase();
-                            return [2 /*return*/, results.filter(function (train) {
-                                    if (train.code.toLowerCase().includes(lowercase_keyword) ||
-                                        train.to.includes(lowercase_keyword) ||
-                                        train.to_pinyin.includes(lowercase_keyword)) {
-                                        return true;
-                                    }
-                                    return false;
-                                })];
+            };
+            this.searchFrom = function (keyword) {
+                var results = _this.search(keyword);
+                var lowercase_keyword = keyword.toLowerCase();
+                return results.filter(function (train) {
+                    if (train.code.toLowerCase().includes(lowercase_keyword) ||
+                        train.from.includes(lowercase_keyword) ||
+                        train.from_pinyin.includes(lowercase_keyword)) {
+                        return true;
                     }
+                    return false;
                 });
-            }); };
-            this.searchFromAndOrTo = function (from, to) { return __awaiter(_this, void 0, void 0, function () {
-                var from_lowercase, fromList, to_lowercase;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            from_lowercase = from.toLowerCase();
-                            return [4 /*yield*/, this.searchFrom(from_lowercase)];
-                        case 1:
-                            fromList = _a.sent();
-                            if (!to) {
-                                return [2 /*return*/, fromList];
-                            }
-                            to_lowercase = to.toLowerCase();
-                            return [2 /*return*/, fromList.filter(function (train) {
-                                    if (train.code.toLowerCase().includes(to_lowercase) ||
-                                        train.to.includes(to_lowercase) ||
-                                        train.to_pinyin.includes(to_lowercase)) {
-                                        return true;
-                                    }
-                                    return false;
-                                })];
+            };
+            this.searchTo = function (keyword) {
+                var results = _this.search(keyword);
+                var lowercase_keyword = keyword.toLowerCase();
+                return results.filter(function (train) {
+                    if (train.code.toLowerCase().includes(lowercase_keyword) ||
+                        train.to.includes(lowercase_keyword) ||
+                        train.to_pinyin.includes(lowercase_keyword)) {
+                        return true;
                     }
+                    return false;
                 });
-            }); };
+            };
+            this.searchFromAndOrTo = function (from, to) {
+                var from_lowercase = from.toLowerCase();
+                var fromList = _this.searchFrom(from_lowercase);
+                if (!to) {
+                    return fromList;
+                }
+                var to_lowercase = to.toLowerCase();
+                return fromList.filter(function (train) {
+                    if (train.code.toLowerCase().includes(to_lowercase) ||
+                        train.to.includes(to_lowercase) ||
+                        train.to_pinyin.includes(to_lowercase)) {
+                        return true;
+                    }
+                    return false;
+                });
+            };
             this.getList();
             this.getMap();
         }
@@ -18549,29 +18520,71 @@ var RoutesPage = /** @class */ (function (_super) {
     __extends(RoutesPage, _super);
     function RoutesPage() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.renderRoutes = function () {
-            return (null);
+        _this.state = {
+            list: [],
+            loading: true
         };
-        return _this;
-    }
-    RoutesPage.prototype.render = function () {
-        return (h("div", { className: "page has-padding-top-7" },
-            h("div", { className: "is-fixed-top is-height-7 has-shadow-3" },
+        _this.renderHeader = function () {
+            var from = decodeURIComponent(_this.props.from);
+            var to = _this.props.to === 'all' ? '我也不知道' : decodeURIComponent(_this.props.to);
+            return (h("div", { className: "is-fixed-top is-height-7 has-shadow-3 has-background-white" },
                 h("div", { className: "is-flex has-addons" },
                     h("div", { className: "control" },
                         h("div", { className: "input is-borderless is-shadowless" },
                             h("span", { className: "has-text-gray" }, "\u4ECE"))),
                     h("div", { className: "control" },
                         h("div", { className: "input is-borderless is-shadowless" },
-                            h("span", { className: "has-text-info" }, "\u65B0\u7586")))),
+                            h("span", { className: "has-text-info" }, from)))),
                 h("div", { className: "is-flex has-addons" },
                     h("div", { className: "control" },
                         h("div", { className: "input is-borderless is-shadowless" },
                             h("span", { className: "has-text-gray" }, "\u5230"))),
                     h("div", { className: "control" },
                         h("div", { className: "input is-borderless is-shadowless" },
-                            h("span", { className: "has-text-info" }, "\u547C\u548C\u6D69\u7279"))))),
-            h(d, null, this.renderRoutes())));
+                            h("span", { className: "has-text-info" }, to))))));
+        };
+        _this.renderRoutes = function () {
+            var from = _this.props.from;
+            var to = _this.props.to === 'all' ? null : _this.props.to;
+            var trains = trainService.searchFromAndOrTo(from, to);
+            return (h(d, null,
+                h("div", { className: "panel" }, trains.map(function (train, index) {
+                    return (h("div", { className: "panel-block is-block" },
+                        h("div", { className: "is-size-7" }, train.code),
+                        h("div", null,
+                            h("span", null, train.from),
+                            h("span", null, " - "),
+                            h("strong", { className: "has-text-info" }, train.to)),
+                        h("div", { className: "is-size-7" },
+                            h("i", { className: "has-text-grey" }, train.no))));
+                }))));
+        };
+        return _this;
+    }
+    RoutesPage.prototype.componentDidMount = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, trainService.getList()];
+                    case 1:
+                        _a.sent();
+                        this.setState({
+                            loading: false
+                        });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    RoutesPage.prototype.render = function (props) {
+        if (this.state.loading) {
+            return (h("div", { className: "page has-padding-top-7" },
+                h(Hero, null, "loading...."),
+                this.renderHeader()));
+        }
+        return (h("div", { className: "page has-padding-top-7" },
+            this.renderRoutes(),
+            this.renderHeader()));
     };
     return RoutesPage;
 }(PageBase));

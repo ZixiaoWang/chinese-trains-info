@@ -31,8 +31,8 @@ export const trainService = (() => {
             return this.train_map;
         }
 
-        search = async (keyword: string) => {
-            const list: Train[] = await this.getList();
+        search = (keyword: string) => {
+            const list: Train[] = this.train_list;
             const lowercase_keyword: string = keyword.toLowerCase();
             const match_list: any[] = [];
 
@@ -60,8 +60,8 @@ export const trainService = (() => {
             });
         }
 
-        searchFrom = async (keyword: string) => {
-            const results =  await this.search(keyword);
+        searchFrom = (keyword: string) => {
+            const results = this.search(keyword);
             const lowercase_keyword: string = keyword.toLowerCase();
 
             return results.filter((train: Train) => {
@@ -74,8 +74,8 @@ export const trainService = (() => {
             })
         }
 
-        searchTo = async (keyword: string) => {
-            const results =  await this.search(keyword);
+        searchTo = (keyword: string) => {
+            const results = this.search(keyword);
             const lowercase_keyword: string = keyword.toLowerCase();
 
             return results.filter((train: Train) => {
@@ -88,16 +88,16 @@ export const trainService = (() => {
             })
         }
 
-        searchFromAndOrTo = async (from: string, to?: string) => {
+        searchFromAndOrTo = (from: string, to?: string | null) => {
             const from_lowercase: string = from.toLowerCase();
-            const fromList: Train[] = await this.searchFrom(from_lowercase);
+            const fromList: Train[] = this.searchFrom(from_lowercase);
             
             if (!to) {
                 return fromList;
             }
 
             const to_lowercase: string = to.toLowerCase();
-            
+
             return fromList.filter((train: Train) => {
                 if (train.code.toLowerCase().includes(to_lowercase) ||
                     train.to.includes(to_lowercase) ||
