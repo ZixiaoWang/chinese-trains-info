@@ -2,6 +2,7 @@ import { h, Component, Fragment } from 'preact';
 import { route } from 'preact-router';
 import { ticketService, trainService } from '../services';
 import { Ticket, Train } from '../interfaces';
+import { Container } from '../components';
 
 export class TicketsPage extends Component<any, any> {
     public state = {
@@ -50,7 +51,7 @@ export class TicketsPage extends Component<any, any> {
             )
         }
         return (
-            <div className="field">
+            <div className="field has-padding-1">
                 <div className="card">
                     <div className="card-content">
                         <span className="is-size-7">{ train.code }</span>
@@ -71,6 +72,12 @@ export class TicketsPage extends Component<any, any> {
     }
 
     render () {
-        return null;
+        return (
+            <Fragment>
+                <Container>
+                    { this.renderHead() }
+                </Container>
+            </Fragment>
+        )
     }
 }

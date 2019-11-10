@@ -14,7 +14,8 @@ export const ticketService = (() => {
                 `rand_code=${ rand_code }`
             ];
 
-            const response: Response = await fetch(left_ticket_api + '?' + params.join('&'));
+            const api: string = left_ticket_api + '?' + params.join('&');
+            const response: Response = await fetch(api, { mode: 'cors' });
             const body = await response.json();
             return lodash.get(body, 'data.data', []);
         }

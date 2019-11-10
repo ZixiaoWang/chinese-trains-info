@@ -18406,7 +18406,7 @@ var ticketService = (function () {
         function TicketService() {
             var _this = this;
             this.queryLeftTicket = function (train_no) { return __awaiter(_this, void 0, void 0, function () {
-                var date, train_date, rand_code, params, response, body;
+                var date, train_date, rand_code, params, api, response, body;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
@@ -18418,7 +18418,8 @@ var ticketService = (function () {
                                 "leftTicketDTO.train_date=" + train_date,
                                 "rand_code=" + rand_code
                             ];
-                            return [4 /*yield*/, fetch(left_ticket_api + '?' + params.join('&'))];
+                            api = left_ticket_api + '?' + params.join('&');
+                            return [4 /*yield*/, fetch(api, { mode: 'cors' })];
                         case 1:
                             response = _a.sent();
                             return [4 /*yield*/, response.json()];
@@ -18702,7 +18703,7 @@ var TicketsPage = /** @class */ (function (_super) {
                         h("div", { className: "card-content" },
                             h("strong", null, "Train is not found")))));
             }
-            return (h("div", { className: "field" },
+            return (h("div", { className: "field has-padding-1" },
                 h("div", { className: "card" },
                     h("div", { className: "card-content" },
                         h("span", { className: "is-size-7" }, train.code),
@@ -18752,7 +18753,8 @@ var TicketsPage = /** @class */ (function (_super) {
         });
     };
     TicketsPage.prototype.render = function () {
-        return null;
+        return (h(d, null,
+            h(Container, null, this.renderHead())));
     };
     return TicketsPage;
 }(y));
