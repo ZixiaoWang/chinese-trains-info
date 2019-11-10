@@ -1,4 +1,5 @@
 import { h, Component, Fragment } from 'preact';
+import { route } from 'preact-router';
 import { PageBase } from './base';
 import { Hero } from '../components';
 import { Train } from '../interfaces';
@@ -15,6 +16,10 @@ export class RoutesPage extends PageBase {
         this.setState({
             loading: false
         })
+    }
+
+    navigateTo = (train: Train) => {
+        route(`${ this.props.url }/no/${ train.no }`);
     }
 
     renderHeader = () => {
@@ -62,7 +67,9 @@ export class RoutesPage extends PageBase {
                     {
                         trains.map((train: Train, index: number) => {
                             return (
-                                <div className="panel-block is-block">
+                                <div key={ index }
+                                    className="panel-block is-block" 
+                                    onClick={ this.navigateTo.bind(this, train) }>
                                     <div className="is-size-7">{ train.code }</div>
                                     <div>
                                         <span>{ train.from }</span>

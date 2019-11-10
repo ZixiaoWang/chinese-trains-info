@@ -18400,6 +18400,40 @@ var stationService = (function () {
     return new StationService();
 })();
 
+var ticketService = (function () {
+    var left_ticket_api = 'https://kyfw.12306.cn/otn/queryTrainInfo/query';
+    var TicketService = /** @class */ (function () {
+        function TicketService() {
+            var _this = this;
+            this.queryLeftTicket = function (train_no) { return __awaiter(_this, void 0, void 0, function () {
+                var date, train_date, rand_code, params, response, body;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            date = new Date();
+                            train_date = date.toISOString().substring(0, 10);
+                            rand_code = Math.random();
+                            params = [
+                                "leftTicketDTO.train_no=" + train_no,
+                                "leftTicketDTO.train_date=" + train_date,
+                                "rand_code=" + rand_code
+                            ];
+                            return [4 /*yield*/, fetch(left_ticket_api + '?' + params.join('&'))];
+                        case 1:
+                            response = _a.sent();
+                            return [4 /*yield*/, response.json()];
+                        case 2:
+                            body = _a.sent();
+                            return [2 /*return*/, lodash.get(body, 'data.data', [])];
+                    }
+                });
+            }); };
+        }
+        return TicketService;
+    }());
+    return new TicketService();
+})();
+
 var FromPage = /** @class */ (function (_super) {
     __extends(FromPage, _super);
     function FromPage() {
@@ -18586,6 +18620,9 @@ var RoutesPage = /** @class */ (function (_super) {
             list: [],
             loading: true
         };
+        _this.navigateTo = function (train) {
+            route(_this.props.url + "/no/" + train.no);
+        };
         _this.renderHeader = function () {
             var from = decodeURIComponent(_this.props.from);
             var to = _this.props.to === 'all' ? '我也不知道' : decodeURIComponent(_this.props.to);
@@ -18611,7 +18648,7 @@ var RoutesPage = /** @class */ (function (_super) {
             var trains = trainService.searchByFromAndOrTo(from, to);
             return (h(d, null,
                 h("div", { className: "panel" }, trains.map(function (train, index) {
-                    return (h("div", { className: "panel-block is-block" },
+                    return (h("div", { key: index, className: "panel-block is-block", onClick: _this.navigateTo.bind(_this, train) },
                         h("div", { className: "is-size-7" }, train.code),
                         h("div", null,
                             h("span", null, train.from),
@@ -18645,6 +18682,80 @@ var RoutesPage = /** @class */ (function (_super) {
     };
     return RoutesPage;
 }(PageBase));
+
+var TicketsPage = /** @class */ (function (_super) {
+    __extends(TicketsPage, _super);
+    function TicketsPage() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
+            train: trainService.searchByNo(_this.props.trainno),
+            train_no: null,
+            left_tickets: [],
+            loading: false,
+            error: null
+        };
+        _this.renderHead = function () {
+            var train = _this.state.train;
+            if (!train) {
+                return (h("div", { className: "field" },
+                    h("div", { className: "card" },
+                        h("div", { className: "card-content" },
+                            h("strong", null, "Train is not found")))));
+            }
+            return (h("div", { className: "field" },
+                h("div", { className: "card" },
+                    h("div", { className: "card-content" },
+                        h("span", { className: "is-size-7" }, train.code),
+                        h("div", { className: "control" },
+                            h("div", null,
+                                h("span", { className: "is-size-6" }, "from: "),
+                                h("strong", null, train.from)),
+                            h("div", null,
+                                h("span", { className: "is-size-6" }, "to: "),
+                                h("strong", null, train.to)))))));
+        };
+        return _this;
+    }
+    TicketsPage.prototype.componentDidMount = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var train_no, left_tickets, e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!this.props.trainno) return [3 /*break*/, 4];
+                        this.setState({
+                            loading: true
+                        });
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        train_no = this.props.trainno;
+                        return [4 /*yield*/, ticketService.queryLeftTicket(train_no)];
+                    case 2:
+                        left_tickets = _a.sent();
+                        this.setState({
+                            loading: false,
+                            train_no: train_no,
+                            left_tickets: left_tickets
+                        });
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_1 = _a.sent();
+                        this.setState({
+                            loading: false,
+                            error: e_1
+                        });
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    TicketsPage.prototype.render = function () {
+        return null;
+    };
+    return TicketsPage;
+}(y));
 
 var Redirect = function (props) {
     if (props === void 0) { props = {}; }
@@ -18685,6 +18796,7 @@ var App = /** @class */ (function (_super) {
             h(FromPage, { path: "/from" }),
             h(ToPage, { path: "/from/:from/to" }),
             h(RoutesPage, { path: "/from/:from/to/:to" }),
+            h(TicketsPage, { path: "/from/:from/to/:to/no/:trainno" }),
             h(Redirect, { path: "/", to: "/from" })));
     };
     return App;

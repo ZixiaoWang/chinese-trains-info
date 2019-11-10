@@ -6,6 +6,7 @@ import { FromPage, ToPage, RoutesPage } from './pages/index';
 import './styles/main.scss';
 import { trainService, stationService } from './services';
 import { Hero, Container } from './components';
+import { TicketsPage } from './pages/tickets.page';
 
 const Redirect = (props: any = {}) => {
     route(props.to || '/from');
@@ -36,10 +37,11 @@ class App extends Component {
 
         return (
             <Router history={ createHashHistory() }>
-                <FromPage path="/from"/>
-                <ToPage path="/from/:from/to"/>
-                <RoutesPage path="/from/:from/to/:to"/>
-                <Redirect path="/" to="/from"/>
+                <FromPage path="/from" />
+                <ToPage path="/from/:from/to" />
+                <RoutesPage path="/from/:from/to/:to" />
+                <TicketsPage path="/from/:from/to/:to/no/:trainno" />
+                <Redirect path="/" to="/from" />
             </Router>
         )
     }

@@ -5,7 +5,7 @@ import { Ticket, Train } from '../interfaces';
 
 export class TicketsPage extends Component<any, any> {
     public state = {
-        train: null,
+        train: trainService.searchByNo(this.props.trainno),
         train_no: null,
         left_tickets: [],
         loading: false,
@@ -17,14 +17,12 @@ export class TicketsPage extends Component<any, any> {
             this.setState({
                 loading: true
             });
-            
+
             try {
                 const train_no: string = this.props.trainno;
-                const train: Train | null | undefined = trainService.searchByNo(train_no);
                 const left_tickets: Ticket[] = await ticketService.queryLeftTicket(train_no);
                 this.setState({
                     loading: false,
-                    train,
                     train_no,
                     left_tickets
                 })
@@ -35,6 +33,41 @@ export class TicketsPage extends Component<any, any> {
                 })
             }
         }
+    }
+
+    renderHead = () => {
+        const train: Train | null | undefined = this.state.train;
+
+        if (!train) {
+            return (
+                <div className="field">
+                    <div className="card">
+                        <div className="card-content">
+                            <strong>Train is not found</strong>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        return (
+            <div className="field">
+                <div className="card">
+                    <div className="card-content">
+                        <span className="is-size-7">{ train.code }</span>
+                        <div className="control">
+                            <div>
+                                <span className="is-size-6">from: </span>
+                                <strong>{ train.from }</strong>
+                            </div>
+                            <div>
+                                <span className="is-size-6">to: </span>
+                                <strong>{ train.to }</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     render () {
