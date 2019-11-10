@@ -34,7 +34,7 @@ export class ToPage extends PageBase {
         const from: string = decodeURIComponent(this.props.from);
         const keyword: string | null = this.state.keyword;
         const items = trainService
-            .searchTo(this.state.keyword)
+            .searchByTo(this.state.keyword)
             .map((train: Train, index: number) => {
                 return (
                     <div key={ index }

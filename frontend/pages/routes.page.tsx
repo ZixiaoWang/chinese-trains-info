@@ -12,7 +12,6 @@ export class RoutesPage extends PageBase {
     }
 
     async componentDidMount() {
-        await trainService.getList();
         this.setState({
             loading: false
         })
@@ -55,7 +54,7 @@ export class RoutesPage extends PageBase {
     renderRoutes = () => {
         const from: string = this.props.from;
         const to: string | null | undefined = this.props.to === 'all' ? null : this.props.to;
-        const trains: Train[] = trainService.searchFromAndOrTo(from, to);
+        const trains: Train[] = trainService.searchByFromAndOrTo(from, to);
 
         return (
             <Fragment>

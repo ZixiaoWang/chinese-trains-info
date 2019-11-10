@@ -60,7 +60,18 @@ export const trainService = (() => {
             });
         }
 
-        searchFrom = (keyword: string | null | undefined) => {
+        searchByNo = (no: string | null | undefined) => {
+            if (!no) {
+                return null;
+            }
+
+            return this.train_list
+                .find((train: Train, index: number) => {
+                    return train.no === no;
+                });
+        }
+
+        searchByFrom = (keyword: string | null | undefined) => {
             if (!keyword) {
                 return this.train_list;
             }
@@ -78,7 +89,7 @@ export const trainService = (() => {
             })
         }
 
-        searchTo = (keyword: string | null | undefined) => {
+        searchByTo = (keyword: string | null | undefined) => {
             if (!keyword) {
                 return this.train_list;
             }
@@ -96,9 +107,9 @@ export const trainService = (() => {
             })
         }
 
-        searchFromAndOrTo = (from: string, to?: string | null) => {
+        searchByFromAndOrTo = (from: string, to?: string | null) => {
             const from_lowercase: string = from.toLowerCase();
-            const fromList: Train[] = this.searchFrom(from_lowercase);
+            const fromList: Train[] = this.searchByFrom(from_lowercase);
             
             if (!to) {
                 return fromList;
