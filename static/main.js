@@ -18401,22 +18401,20 @@ var stationService = (function () {
 })();
 
 var ticketService = (function () {
-    var left_ticket_api = 'https://kyfw.12306.cn/otn/queryTrainInfo/query';
+    var left_ticket_api = '/api/v1/leftTickets';
     var TicketService = /** @class */ (function () {
         function TicketService() {
             var _this = this;
             this.queryLeftTicket = function (train_no) { return __awaiter(_this, void 0, void 0, function () {
-                var date, train_date, rand_code, params, api, response, body;
+                var date, train_date, params, api, response, body;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
                             date = new Date();
                             train_date = date.toISOString().substring(0, 10);
-                            rand_code = Math.random();
                             params = [
-                                "leftTicketDTO.train_no=" + train_no,
-                                "leftTicketDTO.train_date=" + train_date,
-                                "rand_code=" + rand_code
+                                "no=" + train_no,
+                                "date=" + train_date
                             ];
                             api = left_ticket_api + '?' + params.join('&');
                             return [4 /*yield*/, fetch(api, { mode: 'cors' })];
