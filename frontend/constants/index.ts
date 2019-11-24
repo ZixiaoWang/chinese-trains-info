@@ -1,1 +1,1 @@
-export const DATA_PATH: string = '../data/';
+export const DATA_PATH: string = './data/';

@@ -18188,7 +18188,7 @@ var Hero = function (props) {
         h("div", { className: "hero-body" }, props.children)));
 };
 
-var DATA_PATH = '../data/';
+var DATA_PATH = './data/';
 
 var trainService = (function () {
     var TrainService = /** @class */ (function () {
