@@ -57,11 +57,11 @@ export class TicketsPage extends Component<any, any> {
                         <span className="is-size-7">{ train.code }</span>
                         <div className="control">
                             <div>
-                                <span className="is-size-6">from: </span>
+                                <span className="is-size-6">始发: </span>
                                 <strong>{ train.from }</strong>
                             </div>
                             <div>
-                                <span className="is-size-6">to: </span>
+                                <span className="is-size-6">终点: </span>
                                 <strong>{ train.to }</strong>
                             </div>
                         </div>
@@ -82,11 +82,50 @@ export class TicketsPage extends Component<any, any> {
 
         return (
             this.state.left_tickets
-                .map((stop: any, index) => {
+                .map((ticket: Ticket, index: number) => {
+                    const classList: string [] = ['ticket'];
+                    if (index === 0) {
+                        classList.push('is-first');
+                    } else if (index === this.state.left_tickets.length - 1) {
+                        classList.push('is-last');
+                    }
+
                     return (
-                        <div className="card">
+                        <div className="card is-shadowless" key={ index }>
                             <div className="card-content">
-                                { stop.station_name }
+                                <div className={ classList.join(' ') }>
+                                    <small className="ticket-index has-gap">{ ticket.station_no }</small>
+                                    <div className="has-gap">
+                                        <div>{ ticket.station_name }</div>
+                                        <div className="is-size-7">
+                                            {
+                                                index > 0 &&
+                                                ticket.arrive_time &&
+                                                <div className="is-inline-flex has-gap">
+                                                    <strong>到站：</strong>
+                                                    { ticket.arrive_time }
+                                                    { 
+                                                        ticket.arrive_day_diff &&
+                                                        ticket.arrive_day_diff !== '0' &&
+                                                        <sup> +{ ticket.arrive_day_diff }</sup>
+                                                    }
+                                                </div>
+                                            }
+                                            {
+                                                index !== this.state.left_tickets.length - 1 &&
+                                                <div className="is-inline-flex has-gap">
+                                                    <strong>开车：</strong>
+                                                    { ticket.start_time }
+                                                    { 
+                                                        ticket.arrive_day_diff &&
+                                                        ticket.arrive_day_diff !== '0' &&
+                                                        <sup> +{ ticket.arrive_day_diff }</sup>
+                                                    }
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     )

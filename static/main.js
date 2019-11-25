@@ -18707,10 +18707,10 @@ var TicketsPage = /** @class */ (function (_super) {
                         h("span", { className: "is-size-7" }, train.code),
                         h("div", { className: "control" },
                             h("div", null,
-                                h("span", { className: "is-size-6" }, "from: "),
+                                h("span", { className: "is-size-6" }, "\u59CB\u53D1: "),
                                 h("strong", null, train.from)),
                             h("div", null,
-                                h("span", { className: "is-size-6" }, "to: "),
+                                h("span", { className: "is-size-6" }, "\u7EC8\u70B9: "),
                                 h("strong", null, train.to)))))));
         };
         _this.renderList = function () {
@@ -18718,9 +18718,40 @@ var TicketsPage = /** @class */ (function (_super) {
                 return (h("div", { className: "field" }, "No train was found"));
             }
             return (_this.state.left_tickets
-                .map(function (stop, index) {
-                return (h("div", { className: "card" },
-                    h("div", { className: "card-content" }, stop.station_name)));
+                .map(function (ticket, index) {
+                var classList = ['ticket'];
+                if (index === 0) {
+                    classList.push('is-first');
+                }
+                else if (index === _this.state.left_tickets.length - 1) {
+                    classList.push('is-last');
+                }
+                return (h("div", { className: "card is-shadowless", key: index },
+                    h("div", { className: "card-content" },
+                        h("div", { className: classList.join(' ') },
+                            h("small", { className: "ticket-index has-gap" }, ticket.station_no),
+                            h("div", { className: "has-gap" },
+                                h("div", null, ticket.station_name),
+                                h("div", { className: "is-size-7" },
+                                    index > 0 &&
+                                        ticket.arrive_time &&
+                                        h("div", { className: "is-inline-flex has-gap" },
+                                            h("strong", null, "\u5230\u7AD9\uFF1A"),
+                                            ticket.arrive_time,
+                                            ticket.arrive_day_diff &&
+                                                ticket.arrive_day_diff !== '0' &&
+                                                h("sup", null,
+                                                    " +",
+                                                    ticket.arrive_day_diff)),
+                                    index !== _this.state.left_tickets.length - 1 &&
+                                        h("div", { className: "is-inline-flex has-gap" },
+                                            h("strong", null, "\u5F00\u8F66\uFF1A"),
+                                            ticket.start_time,
+                                            ticket.arrive_day_diff &&
+                                                ticket.arrive_day_diff !== '0' &&
+                                                h("sup", null,
+                                                    " +",
+                                                    ticket.arrive_day_diff))))))));
             }));
         };
         return _this;

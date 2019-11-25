@@ -311,6 +311,31 @@
     left: 0px;
     width: 100%; }
 
+.ticket {
+  display: flex;
+  align-items: center; }
+  .ticket:before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 100%;
+    background-color: #333;
+    position: absolute;
+    left: 1.5rem;
+    top: 0px; }
+  .ticket.is-first:before {
+    height: 50%;
+    top: 50%; }
+  .ticket.is-last:before {
+    height: 50%;
+    bottom: 50%; }
+  .ticket-index {
+    font-size: 10px;
+    background-color: #333;
+    color: white;
+    padding: 2px 4px;
+    border-radius: 4px; }
+
 .page {
   width: 100vw;
   height: 100vh;

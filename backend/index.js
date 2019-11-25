@@ -14,6 +14,6 @@ app.use(express.static(path.resolve(__dirname, '../static')));
 
 app.get(RESTFUL_API_BASE + '/leftTickets', getLeftTickets);
 
-app.listen(3000, (request, response) => {
-    console.log(`SERVER IS LISTENING TO ${ colors.green('3000') }`);
+app.listen(80, (request, response) => {
+    console.log(`SERVER IS LISTENING TO ${ colors.green('80') }`);
 })

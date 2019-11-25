@@ -1,0 +1,31 @@
+.ticket {
+    display: flex;
+    align-items: center;
+    
+    &:before {
+        content: '';
+        display: inline-block;
+        width: 3px;
+        height: 100%;
+        background-color: #333;
+        position: absolute;
+        left: 1.5rem;
+        top: 0px;
+    }
+
+    &.is-first:before {
+        height: 50%;
+        top: 50%;
+    }
+    &.is-last:before {
+        height: 50%;
+        bottom: 50%;
+    }
+    &-index {
+        font-size: 10px;
+        background-color: #333;
+        color: white;
+        padding: 2px 4px;
+        border-radius: 4px;
+    }
+}
