@@ -18713,6 +18713,16 @@ var TicketsPage = /** @class */ (function (_super) {
                                 h("span", { className: "is-size-6" }, "to: "),
                                 h("strong", null, train.to)))))));
         };
+        _this.renderList = function () {
+            if (_this.state.left_tickets.length === 0) {
+                return (h("div", { className: "field" }, "No train was found"));
+            }
+            return (_this.state.left_tickets
+                .map(function (stop, index) {
+                return (h("div", { className: "card" },
+                    h("div", { className: "card-content" }, stop.station_name)));
+            }));
+        };
         return _this;
     }
     TicketsPage.prototype.componentDidMount = function () {
@@ -18752,7 +18762,9 @@ var TicketsPage = /** @class */ (function (_super) {
     };
     TicketsPage.prototype.render = function () {
         return (h(d, null,
-            h(Container, null, this.renderHead())));
+            h(Container, null,
+                this.renderHead(),
+                this.renderList())));
     };
     return TicketsPage;
 }(y));

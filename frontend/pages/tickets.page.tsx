@@ -71,11 +71,35 @@ export class TicketsPage extends Component<any, any> {
         )
     }
 
+    renderList = () => {
+        if (this.state.left_tickets.length === 0) {
+            return (
+                <div className="field">
+                    No train was found
+                </div>
+            )
+        }
+
+        return (
+            this.state.left_tickets
+                .map((stop: any, index) => {
+                    return (
+                        <div className="card">
+                            <div className="card-content">
+                                { stop.station_name }
+                            </div>
+                        </div>
+                    )
+                })
+        )
+    }
+
     render () {
         return (
             <Fragment>
                 <Container>
                     { this.renderHead() }
+                    { this.renderList() }
                 </Container>
             </Fragment>
         )
