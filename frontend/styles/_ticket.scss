@@ -1,7 +1,9 @@
+$ticket-blue: #B0E0E6;
+
 .ticket {
     display: flex;
     align-items: center;
-    
+
     &:before {
         content: '';
         display: inline-block;
@@ -27,5 +29,11 @@
         color: white;
         padding: 2px 4px;
         border-radius: 4px;
+    }
+
+    &-card {
+        border-radius: 4px;
+        border: 2px solid $ticket-blue;
+        box-shadow: inset 0px -30px $ticket-blue;
     }
 }

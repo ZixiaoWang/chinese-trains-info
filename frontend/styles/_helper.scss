@@ -4,12 +4,12 @@
     &-top-input { padding-top: 40px !important; }
     &-bottom-input { padding-bottom: 40px !important; }
 
-    @for $i from 1 to 9 {
+    @for $i from 0 to 9 {
         @include box ('padding', $i);
         @include box ('margin', $i);
     }
 
-    @for $i from 1 to 9 {
+    @for $i from 0 to 9 {
         &-shadow-#{ $i } {
             @include shadow ($i, #666);
         }
@@ -35,5 +35,15 @@
 
     &-borderless { 
         border: 0px solid transparent !important; 
+    }
+}
+
+.remove {
+    &-margin {
+        margin: 0px !important;
+    }
+
+    &-padding {
+        padding: 0px !important;
     }
 }

@@ -18728,23 +18728,31 @@ var TicketsPage = /** @class */ (function (_super) {
         };
         _this.renderHead = function () {
             var train = _this.state.train;
+            var date = new Date();
             if (!train) {
                 return (h("div", { className: "field" },
                     h("div", { className: "card" },
                         h("div", { className: "card-content" },
                             h("strong", null, "Train is not found")))));
             }
-            return (h("div", { className: "field has-padding-1" },
-                h("div", { className: "card" },
-                    h("div", { className: "card-content" },
-                        h("span", { className: "is-size-7" }, train.code),
-                        h("div", { className: "control" },
-                            h("div", null,
-                                h("span", { className: "is-size-6" }, "\u59CB\u53D1: "),
+            return (h("div", { className: "has-padding-1" },
+                h("div", { className: "card ticket-card" },
+                    h("div", { className: "has-padding-1" },
+                        h("strong", { className: "has-text-danger is-size-7" }, train.no),
+                        h("div", { className: "level is-mobile" },
+                            h("div", { className: "level-left" },
                                 h("strong", null, train.from)),
-                            h("div", null,
-                                h("span", { className: "is-size-6" }, "\u7EC8\u70B9: "),
-                                h("strong", null, train.to)))))));
+                            h("div", { className: "level-item" },
+                                h("small", { className: "has-text-grey" }, train.code)),
+                            h("div", { className: "level-right" },
+                                h("strong", null, train.to))),
+                        h("div", null,
+                            h("span", null, date.getFullYear()),
+                            h("small", null, "\u5E74"),
+                            h("span", null, date.getMonth() + 1),
+                            h("small", null, "\u6708"),
+                            h("span", null, date.getDate()),
+                            h("small", null, "\u65E5"))))));
         };
         _this.renderList = function () {
             if (_this.state.loading) {

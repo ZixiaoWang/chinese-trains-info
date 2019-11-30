@@ -2,11 +2,11 @@ $gap: 12px;
 
 @mixin box ($model, $unit) {
     &-#{$model} {
-        &-#{$unit} { padding: $unit * $gap !important; }
-        &-top-#{$unit} { padding-top: $unit * $gap !important; }
-        &-bottom-#{$unit} { padding-bottom: $unit * $gap !important; }
-        &-left-#{$unit} { padding-left: $unit * $gap !important; }
-        &-right-#{$unit} { padding-right: $unit * $gap !important; }
+        &-#{$unit} { #{$model}: $unit * $gap !important; }
+        &-top-#{$unit} { #{$model}-top: $unit * $gap !important; }
+        &-bottom-#{$unit} { #{$model}-bottom: $unit * $gap !important; }
+        &-left-#{$unit} { #{$model}-left: $unit * $gap !important; }
+        &-right-#{$unit} { #{$model}-right: $unit * $gap !important; }
     }
 }
 

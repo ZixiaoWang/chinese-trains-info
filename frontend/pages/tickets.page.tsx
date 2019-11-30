@@ -38,6 +38,7 @@ export class TicketsPage extends Component<any, any> {
 
     renderHead = () => {
         const train: Train | null | undefined = this.state.train;
+        const date: Date = new Date();
 
         if (!train) {
             return (
@@ -51,19 +52,28 @@ export class TicketsPage extends Component<any, any> {
             )
         }
         return (
-            <div className="field has-padding-1">
-                <div className="card">
-                    <div className="card-content">
-                        <span className="is-size-7">{ train.code }</span>
-                        <div className="control">
-                            <div>
-                                <span className="is-size-6">始发: </span>
+            <div className="has-padding-1">
+                <div className="card ticket-card">
+                    <div className="has-padding-1">
+                        <strong className="has-text-danger is-size-7">{ train.no }</strong>
+                        <div className="level is-mobile">
+                            <div className="level-left">
                                 <strong>{ train.from }</strong>
                             </div>
-                            <div>
-                                <span className="is-size-6">终点: </span>
+                            <div className="level-item">
+                                <small className="has-text-grey">{ train.code }</small>
+                            </div>
+                            <div className="level-right">
                                 <strong>{ train.to }</strong>
                             </div>
+                        </div>
+                        <div>
+                            <span>{ date.getFullYear() }</span>
+                            <small>年</small>
+                            <span>{ date.getMonth() + 1 }</span>
+                            <small>月</small>
+                            <span>{ date.getDate() }</span>
+                            <small>日</small>
                         </div>
                     </div>
                 </div>
