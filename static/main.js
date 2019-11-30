@@ -18197,7 +18197,7 @@ var Container = function (props) {
 };
 
 var Hero = function (props) {
-    return (h("section", { className: "hero is-fullheight" },
+    return (h("section", { className: "hero" },
         h("div", { className: "hero-body" }, props.children)));
 };
 
@@ -18497,11 +18497,11 @@ var FromPage = /** @class */ (function (_super) {
         _this.renderFocusedStatus = function () { return (h("div", { className: "page has-top-input" },
             _this.renderItems(),
             h("div", { className: "field has-addons is-fixed-top" },
+                h("div", { className: "control is-expanded" },
+                    h("input", { type: "text", onKeyUp: _this.onEventChange.bind(_this, 'keyword'), className: "input is-radiusless", placeholder: "\u4ECE\u54EA\u91CC\u51FA\u53D1?" })),
                 h("div", { className: "control" },
                     h("a", { className: "button is-radiusless", onClick: _this.reset },
-                        h("i", { className: "ion ion-md-arrow-back" }))),
-                h("div", { className: "control is-expanded" },
-                    h("input", { type: "text", onKeyUp: _this.onEventChange.bind(_this, 'keyword'), className: "input is-radiusless", placeholder: "\u4ECE\u54EA\u91CC\u51FA\u53D1?" }))))); };
+                        h("i", { className: "ion ion-md-close-circle" })))))); };
         return _this;
     }
     FromPage.prototype.render = function () {
@@ -18579,11 +18579,11 @@ var ToPage = /** @class */ (function (_super) {
             return (h("div", { className: "page has-top-input" },
                 _this.renderItems(),
                 h("div", { className: "field has-addons is-fixed-top" },
+                    h("div", { className: "control is-expanded" },
+                        h("input", { type: "text", onKeyUp: _this.onEventChange.bind(_this, 'keyword'), className: "input is-radiusless", placeholder: "\u4ECE\u54EA\u91CC\u51FA\u53D1?" })),
                     h("div", { className: "control" },
                         h("a", { className: "button is-radiusless", onClick: _this.reset },
-                            h("i", { className: "ion ion-md-arrow-back" }))),
-                    h("div", { className: "control is-expanded" },
-                        h("input", { type: "text", onKeyUp: _this.onEventChange.bind(_this, 'keyword'), className: "input is-radiusless", placeholder: "\u4ECE\u54EA\u91CC\u51FA\u53D1?" })))));
+                            h("i", { className: "ion ion-md-close-circle" }))))));
         };
         return _this;
     }
@@ -18825,6 +18825,13 @@ var App = /** @class */ (function (_super) {
         _this.state = {
             loading: true
         };
+        _this.backward = function () {
+        };
+        _this.forward = function () {
+        };
+        _this.home = function () {
+            route('/');
+        };
         return _this;
     }
     App.prototype.componentDidMount = function () {
@@ -18856,9 +18863,12 @@ var App = /** @class */ (function (_super) {
                 h(TicketsPage, { path: "/from/:from/to/:to/no/:trainno" }),
                 h(Redirect, { path: "/", to: "/from" })),
             h("div", { className: "float-menu" },
-                h("div", { className: "float-menu-item" }, "Home"),
-                h("div", { className: "float-menu-item" }, "Home"),
-                h("div", { className: "float-menu-item" }, "Home"))));
+                h("div", { className: "float-menu-item" },
+                    h("i", { className: "ion ion-md-arrow-round-back" })),
+                h("div", { className: "float-menu-item", onClick: this.home },
+                    h("i", { className: "ion ion-md-home" })),
+                h("div", { className: "float-menu-item" },
+                    h("i", { className: "ion ion-md-arrow-round-forward" })))));
     };
     return App;
 }(y));

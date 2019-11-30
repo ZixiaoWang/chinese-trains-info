@@ -84,16 +84,16 @@ export class FromPage extends PageBase {
         <div className="page has-top-input">
             { this.renderItems() }
             <div className="field has-addons is-fixed-top">
-                <div className="control">
-                    <a className="button is-radiusless" onClick={ this.reset }>
-                        <i className="ion ion-md-arrow-back"></i>
-                    </a>
-                </div>
                 <div className="control is-expanded">
                     <input type="text" 
                         onKeyUp={ this.onEventChange.bind(this, 'keyword') }
                         className="input is-radiusless" 
                         placeholder="从哪里出发?"/>
+                </div>
+                <div className="control">
+                    <a className="button is-radiusless" onClick={ this.reset }>
+                        <i className="ion ion-md-close-circle"></i>
+                    </a>
                 </div>
             </div>
         </div>

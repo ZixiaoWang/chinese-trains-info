@@ -24,6 +24,18 @@ class App extends Component {
         this.setState({ loading: false })
     }
 
+    backward = () => {
+
+    }
+
+    forward = () => {
+
+    }
+
+    home = () => {
+        route('/');
+    }
+
     render () {
         if (this.state.loading) {
             return (
@@ -46,13 +58,13 @@ class App extends Component {
                 </Router>
                 <div className="float-menu">
                     <div className="float-menu-item">
-                        Home
+                        <i className="ion ion-md-arrow-round-back"></i>
+                    </div>
+                    <div className="float-menu-item" onClick={ this.home }>
+                        <i className="ion ion-md-home"></i>
                     </div>
                     <div className="float-menu-item">
-                        Home
-                    </div>
-                    <div className="float-menu-item">
-                        Home
+                        <i className="ion ion-md-arrow-round-forward"></i>
                     </div>
                 </div>
             </div>
