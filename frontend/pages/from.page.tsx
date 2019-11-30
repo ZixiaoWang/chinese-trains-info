@@ -1,4 +1,4 @@
-import { h, Fragment } from 'preact';
+import { h, Fragment, createRef } from 'preact';
 import { route } from 'preact-router';
 import { PageBase } from './base';
 import { Container, Hero } from '../components';
@@ -11,10 +11,18 @@ export class FromPage extends PageBase {
         keyword: null,
         stations: []
     }
+    public searchInput = createRef();
 
     navigateTo = (station: Station) => {
         const name: string = encodeURIComponent(station.name);
         route(`/from/${ name }/to`);
+    }
+
+    focus = () => {
+        this.onValueChange('focus', true);
+        setTimeout(() => {
+            this.searchInput.current.focus();
+        }, 0)
     }
 
     reset = () => {
@@ -67,7 +75,7 @@ export class FromPage extends PageBase {
                     <div className="field">
                         <div className="control has-icons-left">
                             <input type="text" 
-                                onClick={ this.onValueChange.bind(this, 'focus', true) }
+                                onClick={ this.focus }
                                 className="input is-rounded" 
                                 placeholder="从哪里出发?" />
                             <span className="icon is-small is-left">
@@ -81,11 +89,12 @@ export class FromPage extends PageBase {
     );
 
     renderFocusedStatus = () => (
-        <div className="page has-top-input">
+        <div className="has-top-input">
             { this.renderItems() }
             <div className="field has-addons is-fixed-top">
                 <div className="control is-expanded">
                     <input type="text" 
+                        ref={ this.searchInput }
                         onKeyUp={ this.onEventChange.bind(this, 'keyword') }
                         className="input is-radiusless" 
                         placeholder="从哪里出发?"/>

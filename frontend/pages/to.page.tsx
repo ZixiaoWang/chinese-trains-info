@@ -1,4 +1,4 @@
-import { h, Component, Fragment } from 'preact';
+import { h, Fragment, createRef, RefObject } from 'preact';
 import { route, Link } from 'preact-router';
 import { Container, Hero } from '../components';
 import { attach, onValueChange, onEventChange } from '../functions';
@@ -13,10 +13,18 @@ export class ToPage extends PageBase {
         focus: false,
         keyword: null
     };
+    private searchInput = createRef();
 
     navigateTo = (train: Train) => {
         const to: string = encodeURIComponent(train.to);
         route(`/from/${ this.props.from }/to/${ to }`);
+    }
+
+    focus = () => {
+        this.onValueChange('focus', true);
+        setTimeout(() => {
+            this.searchInput.current.focus();
+        }, 0)
     }
 
     reset = () => {
@@ -82,7 +90,7 @@ export class ToPage extends PageBase {
                                 <input type="text" 
                                     className="input is-rounded" 
                                     placeholder="我想去..." 
-                                    onClick={ this.onValueChange.bind(this, 'focus', true) }/>
+                                    onClick={ this.focus }/>
                                 <span className="icon is-small is-left">
                                     <i className="ion ion-md-map"></i>
                                 </span>
@@ -103,11 +111,12 @@ export class ToPage extends PageBase {
 
     renderFocusedStatus = () => {
         return (
-            <div className="page has-top-input">
+            <div className="has-top-input">
                 { this.renderItems() }
                 <div className="field has-addons is-fixed-top">
                     <div className="control is-expanded">
                         <input type="text" 
+                            ref={ this.searchInput }
                             onKeyUp={ this.onEventChange.bind(this, 'keyword') }
                             className="input is-radiusless" 
                             placeholder="从哪里出发?"/>

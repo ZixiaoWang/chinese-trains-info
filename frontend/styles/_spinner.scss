@@ -1,0 +1,19 @@
+$border-width: 4px;
+$radius: 30px;
+
+.spinner {
+    margin: auto;
+    width: $radius;
+    height: $radius;
+    border-radius: 50%;
+    border-left: $border-width solid #ccc;
+    border-bottom: $border-width solid #ccc;
+    border-right: $border-width solid #ccc;
+    border-top: $border-width solid transparent;
+    animation: rotate .9s ease-in-out infinite forwards;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(359deg); }
+}

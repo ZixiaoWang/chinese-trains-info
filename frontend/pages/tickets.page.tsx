@@ -2,7 +2,7 @@ import { h, Component, Fragment } from 'preact';
 import { route } from 'preact-router';
 import { ticketService, trainService } from '../services';
 import { Ticket, Train } from '../interfaces';
-import { Container } from '../components';
+import { Container, Spinner } from '../components';
 
 export class TicketsPage extends Component<any, any> {
     public state = {
@@ -72,6 +72,10 @@ export class TicketsPage extends Component<any, any> {
     }
 
     renderList = () => {
+        if (this.state.loading) {
+            return <Spinner />;
+        }
+
         if (this.state.left_tickets.length === 0) {
             return (
                 <div className="field">

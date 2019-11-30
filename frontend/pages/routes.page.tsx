@@ -1,7 +1,7 @@
 import { h, Component, Fragment } from 'preact';
 import { route } from 'preact-router';
 import { PageBase } from './base';
-import { Hero } from '../components';
+import { Hero, Spinner } from '../components';
 import { Train } from '../interfaces';
 import { trainService } from '../services';
 
@@ -91,9 +91,9 @@ export class RoutesPage extends PageBase {
     render(props: any) {
         if (this.state.loading) {
             return (
-                <div className="page has-padding-top-7">
+                <div className="has-padding-top-7">
                     <Hero>
-                        loading....
+                        <Spinner />
                     </Hero>
                     {this.renderHeader()}
                 </div>
@@ -101,7 +101,7 @@ export class RoutesPage extends PageBase {
         }
 
         return (
-            <div className="page has-padding-top-7">
+            <div className="has-padding-top-7">
                 {this.renderRoutes()}
                 {this.renderHeader()}
             </div>

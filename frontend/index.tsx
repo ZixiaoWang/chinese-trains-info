@@ -1,11 +1,11 @@
 import { h, render, Component, Fragment } from 'preact';
 import { Router, route } from 'preact-router';
 import { createHashHistory } from 'history';
-import { PageShell, FromPage, ToPage, RoutesPage } from './pages/index';
+import { FromPage, ToPage, RoutesPage } from './pages/index';
 
 import './styles/main.scss';
 import { trainService, stationService } from './services';
-import { Hero, Container } from './components';
+import { Hero, Container, Spinner } from './components';
 import { TicketsPage } from './pages/tickets.page';
 
 const Redirect = (props: any = {}) => {
@@ -40,11 +40,13 @@ class App extends Component {
     render () {
         if (this.state.loading) {
             return (
-                <Hero>
-                    <Container>
-                        Loading....
-                    </Container>
-                </Hero>
+                <div className="hero is-fullheight">
+                    <div className="hero-body">
+                        <div className="container">
+                            <Spinner />
+                        </div>
+                    </div>
+                </div>
             )
         }
 
