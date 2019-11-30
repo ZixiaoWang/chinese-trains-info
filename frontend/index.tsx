@@ -15,7 +15,8 @@ const Redirect = (props: any = {}) => {
 
 class App extends Component {
     public state = {
-        loading: true
+        loading: true,
+        hashHistory: createHashHistory()
     }
 
     async componentDidMount() {
@@ -24,15 +25,15 @@ class App extends Component {
         this.setState({ loading: false })
     }
 
-    backward = () => {
-
+    goBackward = () => {
+        this.state.hashHistory.goBack();
     }
 
-    forward = () => {
-
+    goForward = () => {
+        this.state.hashHistory.goForward();
     }
 
-    home = () => {
+    goHome = () => {
         route('/');
     }
 
@@ -49,7 +50,7 @@ class App extends Component {
 
         return (
             <div className="shell has-padding-bottom-6" data-version="1.0.0">
-                <Router history={ createHashHistory() }>
+                <Router history={ this.state.hashHistory }>
                     <FromPage path="/from" />
                     <ToPage path="/from/:from/to" />
                     <RoutesPage path="/from/:from/to/:to" />
@@ -57,13 +58,13 @@ class App extends Component {
                     <Redirect path="/" to="/from" />
                 </Router>
                 <div className="float-menu">
-                    <div className="float-menu-item">
+                    <div className="float-menu-item" onClick={ this.goBackward }>
                         <i className="ion ion-md-arrow-round-back"></i>
                     </div>
-                    <div className="float-menu-item" onClick={ this.home }>
+                    <div className="float-menu-item" onClick={ this.goHome }>
                         <i className="ion ion-md-home"></i>
                     </div>
-                    <div className="float-menu-item">
+                    <div className="float-menu-item" onClick={ this.goForward }>
                         <i className="ion ion-md-arrow-round-forward"></i>
                     </div>
                 </div>

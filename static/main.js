@@ -18823,13 +18823,16 @@ var App = /** @class */ (function (_super) {
     function App() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            loading: true
+            loading: true,
+            hashHistory: createHashHistory()
         };
-        _this.backward = function () {
+        _this.goBackward = function () {
+            _this.state.hashHistory.goBack();
         };
-        _this.forward = function () {
+        _this.goForward = function () {
+            _this.state.hashHistory.goForward();
         };
-        _this.home = function () {
+        _this.goHome = function () {
             route('/');
         };
         return _this;
@@ -18856,18 +18859,18 @@ var App = /** @class */ (function (_super) {
                 h(Container, null, "Loading....")));
         }
         return (h("div", { className: "shell has-padding-bottom-6", "data-version": "1.0.0" },
-            h(Router, { history: createHashHistory() },
+            h(Router, { history: this.state.hashHistory },
                 h(FromPage, { path: "/from" }),
                 h(ToPage, { path: "/from/:from/to" }),
                 h(RoutesPage, { path: "/from/:from/to/:to" }),
                 h(TicketsPage, { path: "/from/:from/to/:to/no/:trainno" }),
                 h(Redirect, { path: "/", to: "/from" })),
             h("div", { className: "float-menu" },
-                h("div", { className: "float-menu-item" },
+                h("div", { className: "float-menu-item", onClick: this.goBackward },
                     h("i", { className: "ion ion-md-arrow-round-back" })),
-                h("div", { className: "float-menu-item", onClick: this.home },
+                h("div", { className: "float-menu-item", onClick: this.goHome },
                     h("i", { className: "ion ion-md-home" })),
-                h("div", { className: "float-menu-item" },
+                h("div", { className: "float-menu-item", onClick: this.goForward },
                     h("i", { className: "ion ion-md-arrow-round-forward" })))));
     };
     return App;
