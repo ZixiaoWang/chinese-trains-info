@@ -1045,6 +1045,19 @@ function createHashHistory(props) {
   return history;
 }
 
+var PageShell = /** @class */ (function (_super) {
+    __extends(PageShell, _super);
+    function PageShell() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    PageShell.prototype.render = function (props) {
+        return (h("div", { className: "shell" },
+            "it works",
+            props.children));
+    };
+    return PageShell;
+}(y));
+
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function createCommonjsModule(fn, module) {
@@ -18835,12 +18848,17 @@ var App = /** @class */ (function (_super) {
             return (h(Hero, null,
                 h(Container, null, "Loading....")));
         }
-        return (h(Router, { history: createHashHistory() },
-            h(FromPage, { path: "/from" }),
-            h(ToPage, { path: "/from/:from/to" }),
-            h(RoutesPage, { path: "/from/:from/to/:to" }),
-            h(TicketsPage, { path: "/from/:from/to/:to/no/:trainno" }),
-            h(Redirect, { path: "/", to: "/from" })));
+        return (h("div", { className: "shell has-padding-bottom-6", "data-version": "1.0.0" },
+            h(Router, { history: createHashHistory() },
+                h(FromPage, { path: "/from" }),
+                h(ToPage, { path: "/from/:from/to" }),
+                h(RoutesPage, { path: "/from/:from/to/:to" }),
+                h(TicketsPage, { path: "/from/:from/to/:to/no/:trainno" }),
+                h(Redirect, { path: "/", to: "/from" })),
+            h("div", { className: "float-menu" },
+                h("div", { className: "float-menu-item" }, "Home"),
+                h("div", { className: "float-menu-item" }, "Home"),
+                h("div", { className: "float-menu-item" }, "Home"))));
     };
     return App;
 }(y));

@@ -1,7 +1,7 @@
-import { h, render, Component } from 'preact';
+import { h, render, Component, Fragment } from 'preact';
 import { Router, route } from 'preact-router';
 import { createHashHistory } from 'history';
-import { FromPage, ToPage, RoutesPage } from './pages/index';
+import { PageShell, FromPage, ToPage, RoutesPage } from './pages/index';
 
 import './styles/main.scss';
 import { trainService, stationService } from './services';
@@ -36,13 +36,26 @@ class App extends Component {
         }
 
         return (
-            <Router history={ createHashHistory() }>
-                <FromPage path="/from" />
-                <ToPage path="/from/:from/to" />
-                <RoutesPage path="/from/:from/to/:to" />
-                <TicketsPage path="/from/:from/to/:to/no/:trainno" />
-                <Redirect path="/" to="/from" />
-            </Router>
+            <div className="shell has-padding-bottom-6" data-version="1.0.0">
+                <Router history={ createHashHistory() }>
+                    <FromPage path="/from" />
+                    <ToPage path="/from/:from/to" />
+                    <RoutesPage path="/from/:from/to/:to" />
+                    <TicketsPage path="/from/:from/to/:to/no/:trainno" />
+                    <Redirect path="/" to="/from" />
+                </Router>
+                <div className="float-menu">
+                    <div className="float-menu-item">
+                        Home
+                    </div>
+                    <div className="float-menu-item">
+                        Home
+                    </div>
+                    <div className="float-menu-item">
+                        Home
+                    </div>
+                </div>
+            </div>
         )
     }
 }
